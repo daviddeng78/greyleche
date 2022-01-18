@@ -1,12 +1,10 @@
-
-
 GreyLeche
 David Deng
 Faiyaz Rafee
 May Qiu
 pd 7
 ---------------------
-<Project Summary / Risk>
+Terminal Version of Game Risk
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +68,5 @@ tales of wisdom gained...
 2022-01-17
 --------------------------------------------------------------
 May :: V0 Map using 2d arrays
-<Member> :: <Thing member did.>
-<Member> :: <Thing member did.>
+Group: Added flag and proposal
 ==============================================================
