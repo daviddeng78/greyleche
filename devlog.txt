@@ -72,3 +72,6 @@ David Deng, Faiyaz Rafee, May Qiu:: Added flag and proposal
 ==============================================================
 2022-01-18
 David Deng, Faiyaz Rafee, May Qiu:: Worked on UML diagram, Map.java, and Game.java
+
+2022-01-19
+David:: Created rudimentary main menu for game.
