@@ -74,4 +74,5 @@ David Deng, Faiyaz Rafee, May Qiu:: Added flag and proposal
 David Deng, Faiyaz Rafee, May Qiu:: Worked on UML diagram, Map.java, and Game.java
 
 2022-01-19
-David:: Created rudimentary main menu for game.
+David and Faiyaz:: Created rudimentary main menu for game.
+May:: Created a new map with more territories that are labelled. Wrote draft for tutorial instructions. Started the side bar that contains information about player, their army and territory.
