@@ -24,7 +24,7 @@ public class Game {
     int territory = sc.next();
     if (territory.matches("[1-<>][A-<>]")) {
       System.out.println("How many troops would you like to place here?");
-      
+
     } //update this later when we decide on map size
   }
 
