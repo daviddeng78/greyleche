@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 import java.awt.Color;
-import java.util.Scanner;
 public class Map {
   public static void toString(String[][] map) {
         for (int row = 0; row < map.length; row++) {
@@ -16,12 +14,9 @@ public class Map {
           }
         }
 
-private static String[][] map  = {
-=======
-public class Map {
 
-    private static final int[][] map  = {
->>>>>>> 48f9b02b85210278536db5a1403cfa5d76954522
+    private static final String[][] map  = {
+
                   {" ","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"},
                   {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","0"},
                   {"2","1","1","1","1","0","1","1","1","1","1","1","1","1","1","1","1","0"},
@@ -36,8 +31,7 @@ public class Map {
                   {"11","1","1","1","1","1","0","1","1","1","1","0","1","1","1","1","1","0"},
                   {"12","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","0","0"},
                 };
-<<<<<<< HEAD
-Scanner scanner = new Scanner(System.in);
+
 public static void setup(String[][] map){
   toString(map);
   System.out.println();
@@ -51,15 +45,3 @@ public static void setup(String[][] map){
     setup(map);
   }
 }
-=======
-
-    public static void toString(int[][] map) {
-      for (int row = 0; row < map.length; row++) {
-        for (int column = 0; column < map[0].length; column++) {
-            System.out.print(map[row][column] + "    ");
-        }
-        System.out.println();
-      }
-    }
-}
->>>>>>> 48f9b02b85210278536db5a1403cfa5d76954522
