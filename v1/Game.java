@@ -8,24 +8,27 @@ public class Game {
   public static final String BLUE = "\u001B[34m";
   public static final String PURPLE = "\u001B[35m";
   public static final String CYAN = "\u001B[36m";
-  public static void main(String[] args) {
-    System.out.println(RED + "This text is red!" + RESET);
-    System.out.println(BLACK + "This text is red!" + RESET);
-    System.out.println(GREEN + "This text is red!" + RESET);
-    System.out.println(YELLOW + "This text is red!" + RESET);
-    System.out.println(BLUE + "This text is red!" + RESET);
-    System.out.println(PURPLE + "This text is red!" + RESET);
-    System.out.println(CYAN + "This text is red!" + RESET);
-  }
+  //Usage: System.out.println(<color> + <args> + RESET);
 
-  public static void setup() {
+  public static void setup(int player) {
     Scanner sc = new Scanner(System.in);
+    System.out.println()
     System.out.println("Where would you like to place troops? (Enter territory address (e.g. 1A))");
-    int territory = sc.next();
-    if (territory.matches("[1-<>][A-<>]")) {
+    String territory = sc.next();
+    if (territory.matches("[1-<>][A-<>]")) { //update this later when we decide on map size
       System.out.println("How many troops would you like to place here?");
+<<<<<<< HEAD
 
     } //update this later when we decide on map size
+=======
+      
+    }
+    sc.close();
+>>>>>>> 48f9b02b85210278536db5a1403cfa5d76954522
   }
 
+  public static void main(String[] args) {
+    Player p1 = new Player();
+    Player p2 = new Player();
+  }
 }
