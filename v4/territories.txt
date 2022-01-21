@@ -1,0 +1,29 @@
+A[1-4]: China -> 0, 0 ,India and Egypt ,
+B-C[1-2]: India -> China, 0 , United States and May’s Land,
+D-H[1]: United States -> India, 0 , Indonesia, May’s Land and Bangladesh and Russia
+I-K[1] && J[2] : Indonesia -> United States and Russia, ,Pakistan, Philippines
+K[2] && L-M[1-2] : Pakistan -> Indonesia, 0 ,Nigeria, Philippines
+N[2] && O[1-2] :Nigeria -> Pakistan, 0 , Brazil, Ethiopia
+P[1-3]: Brazil -> Nigeria and Ethiopia, 0 , 0, 0
+D[2-3] && E[3] : May’s Land  -> India, United States, Bangladesh, 0
+F[2-3] && G[2] : Bangladesh ->May’s Land, United States, Russia and Mexico, Mexico
+H-I[2]: Russia -> Bangladesh, United States and Indonesia, Mexico and Japan
+G-H[3] && F-H[4]: Mexico -> Bangladesh, Bangladesh and Russia, Japan, Turkey
+I [3-4] && J[4]: Japan ->
+J-L[3]:Philippines ->
+N-O[3] && M-O[4]: Ethiopia ->
+B-C[4]: Egypt ->
+K[4-5]: Congo ->
+Q[4] && P-Q[5]: Vietnam ->
+B-D[5]: Iran ->
+E-G[5]: Turkey ->
+M-N[5]: Germany ->
+H[6-8] && G[8]: Thailand ->
+I[6-8] && J[8]: France ->
+A-B[8]: United Kingdom ->
+E[8] && E-F[9]: Italy ->
+K-O[8]: Faiyaz’s Land ->
+P[8] && N-P[9] : Tanzania
+A[10-11] && B[9-10]: Burma
+I[9-10] && J[10] : South Africa
+K-M[9] && L-M[10]: Kenya
