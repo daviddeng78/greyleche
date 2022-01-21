@@ -13,15 +13,21 @@ public class Player {
         return name;
     }
 
-    public int color() {
+    public int getColor() {
         return color;
     }
 
-    public int territoriesOwned() {
+    public int getTerritoriesOwned() {
         return territoriesOwned;
+    }
+
+    public boolean resigned() {
+        return resigned;
     }
 
     public void resign() {
         resigned = true;
     }
+
+    
 }

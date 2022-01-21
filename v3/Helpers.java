@@ -13,7 +13,9 @@ public class Helpers {
     }
 
     public static void askOption(String menubar) {
-        System.out.printf("\n\nOPTIONS:\n%s\n", menubar);
+        System.out.println("\n\n");
+        divider();
+        System.out.printf("OPTIONS:\n%s\n", menubar);
         System.out.println("\nEnter option: ");
     }
 }

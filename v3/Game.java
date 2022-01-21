@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Game extends Helpers {
@@ -37,8 +38,9 @@ public class Game extends Helpers {
 
         }
         System.out.println(CLEAR);
-        Map m = new Map();
-        m.setup();
+
+        Map map = new Map();
+        System.out.println(map.arrToString(map.getMap())); 
     }
 
     public static void instructions() {
@@ -60,12 +62,12 @@ public class Game extends Helpers {
         switch(option) {
             case 0:
                 start();
+                break;
             default:
-                System.out.println("Please enter a valid input");
                 credits();
         }
         sc.close();
-    }
+    }  
 
     public static void main(String[] args) {
         start();
