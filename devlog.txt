@@ -78,5 +78,6 @@ David and Faiyaz:: Created rudimentary main menu for game.
 May:: Created a new map with more territories that are labelled. Wrote draft for tutorial instructions. Started the side bar that contains information about player, their army and territory.
 
 2022-01-20
+Classwork:: Colored the map so that water and land were more recognizable. Had issues with compiling map without errors
 May:: Assigned country names for the 37 territories in the map. Debugged and fixed map errors. 
 Faiyaz:: Created a adress system to signify location for countries. In the progress of creating a list of adjacent countries for each country so we can tell which countries the player can actually attack.
