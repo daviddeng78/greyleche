@@ -2,10 +2,14 @@ public class Territory {
     private int troops;
     private int color;
 
-    public void getTerritoryName(String coordinate) {
+    public String getTerritoryName(String coordinate) {
         //coordinates are in <Letter><Number> form
-        for (int i = 0; i < map.getMap().length; i++) {
-            if (map.getMap()[i][0] == )
+        for (int i = 0; i < Map.getAddresses().length; i++) {
+            if (coordinate.matches(Map.getAddresses()[i])) {
+                return Map.getAddresses()[i];
+            }
         }
     }
+
+    
 }

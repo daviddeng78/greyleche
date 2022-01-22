@@ -18,4 +18,17 @@ public class Helpers {
         System.out.printf("OPTIONS:\n%s\n", menubar);
         System.out.println("\nEnter option: ");
     }
+
+    public static void toString(String[] array) {
+        String result = "";
+        for (int i = 0; i < array.length - 1; i++) {
+            result += array[i] + ", ";
+        }
+        System.out.println(result + array[array.length - 1]);
+    }
+
+    public static void main(String[] args) {
+        String[] test = {"1", "2", "3"};
+        toString(test);
+    }
 }

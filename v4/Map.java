@@ -1,7 +1,9 @@
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Map extends Helpers {
-    private static String[][] map  = {
+    private String[][] map  = {
                 {" ","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"},
                 {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","0"},
                 {"2","1","1","1","1","0","1","1","1","1","1","1","1","1","1","1","1","0"},
@@ -17,14 +19,29 @@ public class Map extends Helpers {
                 {"12","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","0","0"},
     };
 
+    private static String[] territoryAddresses = new String[37];
+    private static String[] territories = new String[37];
+    private static String[] adjacencies = new String[37];
+    
     public Map() {
         
     }
 
-    public static String[][] getMap() {
+    public String[][] getMap() {
         return map;
     }
 
+    public static String[] getAddresses() {
+        return territoryAddresses;
+    }
+
+    public static String[] getTerritory() {
+        return territories;
+    }
+
+    public static String[] getAdjacencies() {
+        return adjacencies;
+    }
 
     public static String arrToString(String[][] map) {
         String result = "";
@@ -48,5 +65,34 @@ public class Map extends Helpers {
             result += "\n";
         }
         return result;
+    }
+
+    public static void setupAdjacencies() {
+        try {
+            FileReader fr = new FileReader("territories.txt");
+            StringBuilder sb = new StringBuilder();
+            int chr;
+            try {
+                while ((chr = fr.read()) != -1) {
+                    sb.append((char) chr);
+                }
+                fr.close();
+                String territoriesInfo = sb.toString();
+                String[] territoryInfo = territoriesInfo.split("\n");
+                for (int i = 0; i < territoryInfo.length; i++) {
+                    int border = territoryInfo[i].indexOf(":");
+                    int border2 = territoryInfo[i].indexOf("->");
+                    getAddresses()[i] = territoryInfo[i].substring(0, border).trim();
+                    getTerritory()[i] = territoryInfo[i].substring(border + 1, border2).trim();
+                    getAdjacencies()[i] = territoryInfo[i].substring(border2 + 2).trim();
+                }
+            }
+            catch (IOException ioException) {
+
+            }
+        }
+        catch (FileNotFoundException fException) {
+            System.out.println("Make sure the 'adjancencies.txt` file is in this current directory");
+        }
     }
 }

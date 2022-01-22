@@ -80,4 +80,7 @@ May:: Created a new map with more territories that are labelled. Wrote draft for
 2022-01-20
 Classwork:: Colored the map so that water and land were more recognizable. Had issues with compiling map without errors
 May:: Assigned country names for the 37 territories in the map. Debugged and fixed map errors. 
-Faiyaz:: Created a adress system to signify location for countries. In the progress of creating a list of adjacent countries for each country so we can tell which countries the player can actually attack.
+Faiyaz:: Created a address system to signify location for countries. In the progress of creating a list of adjacent countries for each country so we can tell which countries the player can actually attack.
+
+2022-01-22
+David:: Created 'territories.txt' to hold territory info. Integrated this file into game through file reading for sorting into useful arrays during setup of game.
