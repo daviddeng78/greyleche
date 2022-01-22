@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Map extends Helpers {
-    private String[][] map  = {
+    private static String[][] map  = {
                 {" ","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"},
                 {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","0","1","1","0"},
                 {"2","1","1","1","1","0","1","1","1","1","1","1","1","1","1","1","1","0"},
@@ -27,7 +27,7 @@ public class Map extends Helpers {
         
     }
 
-    public String[][] getMap() {
+    public static String[][] getMap() {
         return map;
     }
 

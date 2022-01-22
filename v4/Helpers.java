@@ -9,13 +9,13 @@ public class Helpers {
     protected static final String CYAN = "\u001B[36m";
 
     public static void divider() {
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println(BLUE + "-----------------------------------------------------------------" + RESET);
     }
 
     public static void askOption(String menubar) {
         System.out.println("\n\n");
         divider();
-        System.out.printf("OPTIONS:\n%s\n", menubar);
+        System.out.printf("%1sOPTIONS:\n%2s\n%3s", YELLOW, menubar, RESET);
         System.out.println("\nEnter option: ");
     }
 
@@ -25,10 +25,5 @@ public class Helpers {
             result += array[i] + ", ";
         }
         System.out.println(result + array[array.length - 1]);
-    }
-
-    public static void main(String[] args) {
-        String[] test = {"1", "2", "3"};
-        toString(test);
     }
 }
