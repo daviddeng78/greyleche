@@ -74,8 +74,46 @@ public class Game extends Helpers {
         System.out.println(CLEAR);
         System.out.println("GOAL");
         divider();
-        System.out.println("CONQUER ALL 37 TERRITORIES");
+        System.out.println("The goal of this game is to build an army and conquer all 37 territories.");
+        System.out.println("Press 1 to continue reading");
         Scanner sc = new Scanner(System.in);
+        if(sc.next().equals("1")){
+          divider();
+          System.out.println("Step 1 Placement \nThe number of armies gained each move is proportional to the number of territories you own.");
+        }
+        divider();
+        if(sc.next().equals("1")){
+          divider();
+          System.out.println("Step 2 \nAttack Place troops into territory you would like to conquer." +
+          "\nRemember: The territory you wish to attack must be adjacent to your territory! \nThis would only work if you dispatch at least 10 more troops than the number of troops already in that territory. \nThe number of troops dispatched is subtracted from your total army count.");
+        }
+        divider();
+        if(sc.next().equals("1")){
+          divider();
+          System.out.println("Step 3: \nFortify You can move troops from one of your territories to another.");
+        }
+        divider();
+        if(sc.next().equals("1")){
+          divider();
+          System.out.println("You do not need to do all three steps if you deem it unnecessary. \nThese steps are repeated between you and the opponent until one of you claims all the territory." +
+          "\nIf you wish to resign, simply type resign into the terminal whenever it is your turn.");
+        }
+        System.out.println("");
+        askOption("0. Play \n1. Credits \n2. Exit");
+        int option = sc.nextInt();
+        switch(option){
+          case 0:
+            play();
+            break;
+          case 1:
+            credits();
+            break;
+          case 2:
+            System.exit(0);
+            break;
+          default:
+          instructions();
+        }
     }
 
     public static void credits() {
