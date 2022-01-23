@@ -18,13 +18,28 @@ public class Map extends Helpers {
                 {"11","1","1","1","1","1","0","1","1","1","1","0","1","1","1","1","1","0"},
                 {"12","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","0","0"},
     };
+    private static String[][] mapColor  = {
+                {" ",PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE,PURPLE},
+                {PURPLE,"","","","","","","","","","","","","",CYAN,"","",CYAN},
+                {PURPLE,"","","","",CYAN,"","","","","","","","","","","",CYAN},
+                {PURPLE,"",CYAN,CYAN,"","","","","","","","","",CYAN,"","","",CYAN},
+                {PURPLE,"","","",CYAN,CYAN,"","","","","","",CYAN,"","","",CYAN,""},
+                {PURPLE,CYAN,"","","","","","",CYAN,CYAN,CYAN,"",CYAN,"","",CYAN,"",""},
+                {PURPLE,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,"","",CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN},
+                {PURPLE,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,"","",CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN},
+                {PURPLE,"","",CYAN,CYAN,"",CYAN,"","","","","","","","","","",CYAN},
+                {PURPLE,CYAN,"",CYAN,CYAN,"","",CYAN,"","",CYAN,"","","","","","",CYAN},
+                {PURPLE,"","","","",CYAN,"","",CYAN,CYAN,"",CYAN,"","","","0",CYAN,CYAN},
+                {PURPLE,"","","","","",CYAN,"","","","",CYAN,"","","","","",CYAN},
+                {PURPLE,"","",CYAN,CYAN,"","",CYAN,"","","","","","","","",CYAN,CYAN},
+    };
 
     private static String[] territoryAddresses = new String[37];
     private static String[] territories = new String[37];
     private static String[] adjacencies = new String[37];
-    
+
     public Map() {
-        
+
     }
 
     public static String[][] getMap() {
@@ -50,27 +65,21 @@ public class Map extends Helpers {
                 //for territory address labels
                 if (row == 0 || column == 0) {
                     if (row >= 10) {
-                        result += PURPLE + map[row][column] + RESET + "   ";
+                        result += mapColor[row][column] + map[row][column] + RESET + "   ";
                     }
                     else {
-                        result += PURPLE + map[row][column] + RESET + "    ";
+                        result += mapColor[row][column] + map[row][column] + RESET + "    ";
                     }
                 }
-                //for sea
-                else if (map[row][column].equals("0")) {
-                    result += CYAN + map[row][column] + RESET + "    ";
-                }
-                //for land
-                // else if (Integer.parseInt(map[row][column]) != 0)
                 else {
-                    result += map[row][column] + "    ";
+                    result += mapColor[row][column] + map[row][column] + RESET + "    ";
                 }
             }
             result += "\n";
         }
         return result;
     }
-
+    
     public static void setupMapInfoArrays() {
         try {
             FileReader fr = new FileReader("territories.txt");
@@ -98,5 +107,8 @@ public class Map extends Helpers {
         catch (FileNotFoundException fException) {
             System.out.println("Make sure the 'adjancencies.txt` file is in this current directory");
         }
+    }
+    public static void main(String[] args) {
+      System.out.println(arrToString(map));
     }
 }
