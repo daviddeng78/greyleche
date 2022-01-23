@@ -9,10 +9,12 @@ public class Game extends Helpers {
     }
 
     public Game() {
-        start();
+        Player p1 = new Player();
+        Player p2 = new Player();
+        start(p1, p2);
     }
 
-    public static void start() {
+    public static void start(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println(RED + "RISK MAIN MENU" + RESET);
         askOption("1. PLAY \t 2. INSTRUCTIONS \t 3. CREDITS \t 4. EXIT");
@@ -20,34 +22,37 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch(option) {
             case 1:
-                setup();
+                setup(p1, p2);
                 break;
             case 2:
-                instructions();
+                instructions(p1, p2);
                 break;
             case 3:
-                credits();
+                credits(p1, p2);
                 break;
             case 4:
                 System.exit(0);
                 break;
             default:
-                start();
+                start(p1, p2);
                 break;
         }
     }
 
-    public static void setup() {
+    public static void setup(Player p1, Player p2) {
         System.out.println(CLEAR);
-        System.out.println("SETUP GAME");
+        System.out.println(RED + "SETUP GAME" + RESET);
         divider();
+
         System.out.println("\nEnter Player 1 Name");
         Scanner sc = new Scanner(System.in);
-        Player p1 = new Player(sc.next());
-        System.out.println("Player 1: " + p1.getName() + " Initialized!");
+        p1.setName(sc.next());
+        p1.setColor(RED);
+        System.out.printf("%1s initialized, your color is %2sRED%3s\n", p1.getName(), p1.getColor(), RESET);
         System.out.println("\nEnter Player 2 Name");
-        Player p2 = new Player(sc.next());
-        System.out.println("Player 2: " + p2.getName() + " Initialized!\n");
+        p2.setName(sc.next());
+        p2.setColor(GREEN);
+        System.out.printf("%1s initialized, your color is %2sGREEN%3s\n\n\n", p2.getName(), p2.getColor(), RESET);
         sc.close();
         try {
             Thread.sleep(1000);
@@ -56,7 +61,7 @@ public class Game extends Helpers {
 
         }
         System.out.println("READING territories.txt");
-        Map.setupAdjacencies();
+        Map.setupMapInfoArrays();
         try {
             Thread.sleep(1000);
         }
@@ -70,10 +75,10 @@ public class Game extends Helpers {
         catch (InterruptedException e) {
 
         }
-        play();
+        play(p1, p2);
     }
 
-    public static void play() {
+    public static void play(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("Starting game...");
         try {
@@ -86,15 +91,14 @@ public class Game extends Helpers {
         System.out.println(Map.arrToString(Map.getMap()));
         initPlacement = true;
         System.out.println("Starting initial placement...");
-        while (!(p1.get))
     }
 
-    public static void instructions() {
+    public static void instructions(Player p1, Player p2) {
         System.out.println(CLEAR);
-        page1();
+        page1(p1, p2);
     }
 
-    public static void page1() {
+    public static void page1(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("GOAL");
         divider();
@@ -104,22 +108,22 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch(option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             case 2:
-                page2();
+                page2(p1, p2);
                 break;
             case 3:
-                setup();
+                setup(p1, p2);
                 break;
             default:
-                page1();
+                page1(p1, p2);
                 break;
         }
         sc.close();
     }
 
-    public static void page2() {
+    public static void page2(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("PLACEMENT");
         divider();
@@ -129,25 +133,25 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch (option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             case 1:
-                page1();
+                page1(p1, p2);
                 break;
             case 2:
-                page3();
+                page3(p1, p2);
                 break;
             case 3:
-                setup();
+                setup(p1, p2);
                 break;
             default:
-                page2();
+                page2(p1, p2);
                 break;
         }
         sc.close();
     }
 
-    public static void page3() {
+    public static void page3(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("ATTACKING");
         divider();
@@ -157,25 +161,25 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch (option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             case 1:
-                page2();
+                page2(p1, p2);
                 break;
             case 2:
-                page4();
+                page4(p1, p2);
                 break;
             case 3:
-                setup();
+                setup(p1, p2);
                 break;
             default:
-                page3();
+                page3(p1, p2);
                 break;
         }
         sc.close();
     }
 
-    public static void page4() {
+    public static void page4(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("FORTIFYING");
         divider();
@@ -185,25 +189,25 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch (option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             case 1:
-                page3();
+                page3(p1, p2);
                 break;
             case 2:
-                page5();
+                page5(p1, p2);
                 break;
             case 3:
-                setup();
+                setup(p1, p2);
                 break;
             default:
-                page4();
+                page4(p1, p2);
                 break;
         }
         sc.close();
     }
 
-    public static void page5() {
+    public static void page5(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("EXTRA NOTES");
         divider();
@@ -213,22 +217,22 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch (option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             case 1:
-                page4();
+                page4(p1, p2);
                 break;
             case 3:
-                setup();
+                setup(p1, p2);
                 break;
             default:
-                page5();
+                page5(p1, p2);
                 break;
         }
         sc.close();
     }
 
-    public static void credits() {
+    public static void credits(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("CREDITS");
         divider();
@@ -238,15 +242,15 @@ public class Game extends Helpers {
         int option = sc.nextInt();
         switch(option) {
             case 0:
-                start();
+                start(p1, p2);
                 break;
             default:
-                credits();
+                credits(p1, p2);
         }
         sc.close();
     }
 
     public static void main(String[] args) {
-        start();
+        Game game = new Game();
     }
 }

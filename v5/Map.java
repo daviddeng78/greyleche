@@ -71,7 +71,7 @@ public class Map extends Helpers {
         return result;
     }
 
-    public static void setupAdjacencies() {
+    public static void setupMapInfoArrays() {
         try {
             FileReader fr = new FileReader("territories.txt");
             StringBuilder sb = new StringBuilder();

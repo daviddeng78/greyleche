@@ -1,31 +1,31 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class Player {
-    private static String name;
-    private static String color;
-    private static String[] territoriesOwned;
-    private static int numberTerritories;
+public class Player extends Helpers{
+    private String name;
+    private String color;
+    private String[] territoriesOwned;
+    private int numberTerritories;
     private boolean resigned;
 
-    public Player(String name) {
+    public Player() {
         resigned = false;
-        this.name = name;
     }
 
     //accessor methods
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static String getColor() {
+    public String getColor() {
         return color;
     }
 
-    public static String[] getTerritoriesOwned() {
+    public String[] getTerritoriesOwned() {
         return territoriesOwned;
     }
 
-    public static int numberTerritories() {
+    public int numberTerritories() {
         return numberTerritories;
     }
 
@@ -37,16 +37,32 @@ public class Player {
         resigned = true;
     }
 
-    public static void initPlace() {
-        System.out.println(getColor() + getName() + RESET + ", enter the address of a territory");
+    //mutator methods
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void initPlace() {
+        System.out.println(getColor() + getName() + RESET + ", enter the address of an unoccupied territory");
         Scanner sc = new Scanner(System.in);
         String territoryAddress = sc.next();
-        if (territoryAddress.matches("[A-Q][0-1]]")) {
-
+        if (territoryAddress.trim().matches("[A-Q][1-9] | [A-Q]1[0-2]") ) {
+            String territoryName = Territory.getTerritoryName(territoryAddress);
+            if ()
+            System.out.println(territoryName + " selected");
+            System.out.println("");
+            Scanner sc = 
+        }
+        else {
+            initPlace();
         }
     }
 
-    public static void place() {
+    public void place() {
         int reinforcements = numberTerritories() / 3;
         System.out.printf(getColor() + getName() + RESET + " gained %d troops this round. Entering placement period...", reinforcements);
         Scanner sc = new Scanner(System.in);

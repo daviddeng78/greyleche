@@ -1,5 +1,3 @@
-import java.awt.Point;
-
 public class Helpers {
     protected static final String CLEAR = "\033[H\033[2J";
     protected static final String RESET = "\u001B[0m";
