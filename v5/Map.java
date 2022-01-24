@@ -33,7 +33,7 @@ public class Map extends Helpers {
                 {PURPLE,"","","","","",CYAN,"","","","",CYAN,"","","","","",CYAN},
                 {PURPLE,"","",CYAN,CYAN,"","",CYAN,"","","","","","","","",CYAN,CYAN},
     };
-
+    
     private static String[] territoryAddresses = new String[37];
     private static String[] territories = new String[37];
     private static String[] adjacencies = new String[37];
@@ -79,7 +79,7 @@ public class Map extends Helpers {
         }
         return result;
     }
-    
+
     public static void setupMapInfoArrays() {
         try {
             FileReader fr = new FileReader("territories.txt");
