@@ -4,6 +4,6 @@ Our project is a terminal version of the board game Risk. The objective of this 
 
 ### Instructions on how to launch the game:
 * Open terminal and type in these in order:
-** git clone https://github.com/daviddeng78/greyleche.git
-** javac greyleche/Game.java
-** java Game
+* git clone https://github.com/daviddeng78/greyleche.git
+* javac greyleche/Game.java
+* java Game
