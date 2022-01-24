@@ -27,7 +27,7 @@ Switch is a nice alternative to if statements at times, it is more shorter to wr
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-we changed ___ to ___ bc...
+we changed the arrToString method from changing the color to making a seperate string color array to make it easier to manipulate and make the arrToString method shorter.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
