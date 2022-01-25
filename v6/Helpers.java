@@ -35,9 +35,4 @@ public class Helpers {
     public static int convertLetterToNum(char c) {
         return c - 64;
     }
-
-    public static void main(String[] args) {
-        System.out.println("This is regular text");
-        System.out.println(BOLD + "This is bolded text" + RESET);
-    } 
 }
