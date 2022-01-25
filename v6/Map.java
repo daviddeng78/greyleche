@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Map extends Helpers {
     private static String[][] map  = {
@@ -132,7 +133,34 @@ public class Map extends Helpers {
             System.out.println("Make sure the 'adjancencies.txt` file is in this current directory");
         }
     }
+    public static ArrayList<ArrayList<String>> andRemover(){
+
+      ArrayList<ArrayList<String>> ajac = new ArrayList<ArrayList<String>>(37);
+      /* for(int i = 0; i < (getAdjacencies()).length; i++)  {
+          ArrayList<String> abc = new ArrayList<String>();
+          abc.add("");
+          ajac.add(abc);
+      } */
+      for(int i = 0; i< (getAdjacencies()).length; i++){
+        //holding.clear();
+        ArrayList<String> holding = new ArrayList<String>(100);
+        String str = (getAdjacencies())[i];
+        String[] holder = str.split(", ",148);
+        for(int x = 0; x < holder.length; x++){
+          String str2 = holder[x];
+          String[] holder2 = str2.split(" and ", 148);
+          for(int j = 0; j < holder2.length; j++){
+            holding.add(holder2[j]);
+          }
+        }
+        ajac.add(holding);
+      }
+      return ajac;
+    }
+
     public static void main(String[] args) {
-      System.out.println(arrToString(map));
+      setupMapInfoArrays();
+      System.out.println(andRemover());
+      System.out.println(getTerritory().length);
     }
 }

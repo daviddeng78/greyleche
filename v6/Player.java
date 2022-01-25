@@ -63,7 +63,7 @@ public class Player extends Helpers{
                 System.out.println(territoryName + " selected");
                 if (this.getTerritoriesOwned().size() + this.getTerritoriesOwned().size() != 37) {
                     System.out.println("Placing 1 troop on " + territoryName);
-                    
+
                 }
             }
         }
@@ -91,4 +91,96 @@ public class Player extends Helpers{
             }
         }
     }
+  public boolean isOwned(String territory){
+    for(int i=0; i<territoriesOwned.size();i++){
+      if(territory.equals(territoriesOwned.get(i))){
+        return true;
+      }
+    }
+    return false;
+  }
+  public String help1(ArrayList<String> offense){
+    scanner we = new Scanner(System.in);
+    System.out.println("here are your terrorrities you can attack from:" + offense);
+    System.out.println("Pick a terrority to attack from!");
+    String te = we.nextline();
+    boolean correct = false
+    for(int x = 0; x < offense.size(); i++){
+      if(te.equals(offense.get(i))){
+        correct = true
+      }
+    }
+    if(!correct){
+      System.out.print("Not a terrotity you can attack from!");
+      help1(offense);
+  }
+    else{
+      return te;
+  }
+}
+  public void attack(){
+    ArrayList<String> terror = convert(getTerritory());
+    ArrayList<ArrayList<String>> adj = Map.andRemover();
+    Scanner to = new Scanner(System.in);
+    System.out.println("Please enter the coordinates of the territory you wish to attack!");
+    String cord = to.nextline();
+    String target = Territory.getTerritoryName(cord);
+    if(isOwned(target)){
+      System.out.println("You cannot attack your own land. Please reenter a coordinate to attack");
+      attack();
+    }
+    else{
+      ArrayList<String> offense = new ArrayList<String>();
+      int ind = terror.indexOf(target);
+       for(int i = 0; i < (adj.get(ind)).size(); i++){
+         if (isOwned((adj.get(ind)).get(i))){
+           offense.add((adj.get(ind)).get(i));
+         }
+       }
+       if (offense.size() == 0){
+         System.out.println("you do not have any terrorrity to attack from! Please reenter a cordinate to attack");
+         attack();
+       }
+       else{
+        String TE = help1(offense);
+
+       }
+    }
+    }
+    }
+
+  public static ArrayList<String> convert(String[] x){
+    ArraLlist<String> ans = new ArrayList<String>();
+    for(int i = 0; i < x.length; i++){
+      ans.add(x[1]);
+    }
+    return ans;
+  }
+/*  public void fortify(){
+    Scanner take = new Scanner(System.in);
+    System.out.println("Please enter the coordinates of the territory from where you wish to take troops from.");
+    String takeTerritory = Territory.getTerritoryName(take.nextline());
+
+    Scanner troop = new Scanner(System.in);
+    System.out.println("Please enter the number of troops you wish to take.");
+    int noOfTroop = troop.nextInt;
+
+    Scanner fort = new Scanner(System.in);
+    System.out.println("Please enter the coordinates of the territory from which you wish to fortify");
+    String targetTerritory = Territory.getTerritoryName(fort.nextline());
+
+    if(takeTerritory.equals(targetTerritory) ){
+      System.out.println("You cannot fortify the same territory you wish to take troops from!");
+    }
+
+    if( noOfTroop > takeTerritory.getTroops) {
+      targetTerritory.troops += noOfTroop;
+      System.out.println("Fortifying " + targetTerritory " with " + noOfTroop " troops from " + takeTerritory "!")
+    } else {
+      System.out.println("There are not enough troops to take!")
+    }
+
+
+  } */
+  }
 }
