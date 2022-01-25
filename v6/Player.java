@@ -9,10 +9,13 @@ public class Player extends Helpers{
     private int numberTerritories;
     private boolean resigned;
     private int initReinforcements;
+    Scanner sc;
 
     public Player() {
         resigned = false;
         initReinforcements = 40;
+        sc = new Scanner(System.in);
+        territoriesOwned = new ArrayList<String>();
     }
 
     //accessor methods
@@ -55,20 +58,46 @@ public class Player extends Helpers{
 
     public void initPlace(Player otherPlayer) {
         System.out.println(this.getColor() + this.getName() + RESET + ", enter the address of an unoccupied territory");
-        Scanner sc = new Scanner(System.in);
-        String territoryAddress = sc.next();
-        if (territoryAddress.trim().matches("[A-Q][1-9] | [A-Q]1[0-2]") ) {
+        String territoryAddress = sc.next().trim();
+        if (territoryAddress.matches("[A-Q][1-9]") || territoryAddress.matches("[A-Q]1[0-2]")) {
             String territoryName = Territory.getTerritoryName(territoryAddress);
-            if (!Arrays.asList(this.getTerritoriesOwned()).contains(territoryName) && !Arrays.asList(otherPlayer.getTerritoriesOwned()).contains(territoryName)) {
+            if (!Arrays.asList(this.territoriesOwned).contains(territoryName) && !Arrays.asList(otherPlayer.territoriesOwned).contains(territoryName)) {
                 System.out.println(territoryName + " selected");
-                if (this.getTerritoriesOwned().size() + this.getTerritoriesOwned().size() != 37) {
+                if (this.territoriesOwned.size() + this.territoriesOwned.size() != 37 || this.territoriesOwned.size() == 0) {
                     System.out.println("Placing 1 troop on " + territoryName);
-                    
+                    Territory.changeColor(territoryName, this.getColor());
+                    Territory.changeTroops(territoryName, 1);
+                    this.initReinforcements -= 1;
+                    this.territoriesOwned.add(territoryName);
                 }
+                else {
+                    System.out.printf("How many troops would you like to add to %s?", territoryName);
+                    int troops = sc.nextInt();
+                    if (troops <= initReinforcements) {
+                        System.out.printf("Placing %d on %s", troops, territoryName);
+                        Territory.changeColor(territoryName, this.getColor());
+                        Territory.changeTroops(territoryName, troops);
+                        this.initReinforcements -= troops;
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch (InterruptedException e) {
+
+                        }
+                        System.out.println(CLEAR);
+                        Map.arrToString(Map.getMap());
+                    }
+                    else {
+                        System.out.printf("You only have %s available reinforcements", initReinforcements);
+                        this.initPlace(otherPlayer);
+                    }
+                }
+                System.out.println(CLEAR);
+                System.out.println(Map.arrToString(Map.getMap()));
             }
         }
         else {
-            initPlace(this);
+            initPlace(otherPlayer);
         }
     }
 

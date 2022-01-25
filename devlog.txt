@@ -84,3 +84,6 @@ Faiyaz:: Created a address system to signify location for countries. In the prog
 
 2022-01-22
 David:: Created 'territories.txt' to hold territory info. Integrated this file into game through file reading for sorting into useful arrays during setup of game.
+
+2022-01-24
+David:: Fixed color and troop update methods for some coordinates. 

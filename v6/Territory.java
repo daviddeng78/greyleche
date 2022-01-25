@@ -1,10 +1,14 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Territory extends Helpers {
     private int[] troops = new int[37];
     private String[] color = new String[37];
     private boolean[] isSelected;
 
     public Territory() {
-        
+        Scanner sc = new Scanner(System.in);
     }
 
     public int[] getTroops() {
@@ -31,7 +35,7 @@ public class Territory extends Helpers {
         return territory;
     }
 
-    public String getTerritoryCoords(String territoryName) {
+    public static String getTerritoryCoords(String territoryName) {
         String possibleCoords = "";
         for (int i = 0; i < Map.getTerritory().length; i++) {
             if (territoryName.equals(Map.getTerritory()[i])) {
@@ -42,106 +46,118 @@ public class Territory extends Helpers {
         return possibleCoords;
     }
 
-    public void changeColor(String territoryName, String color) {
+    public static void changeColor(String territoryName, String color) {
         String territoryCoords = getTerritoryCoords(territoryName);
+        ArrayList<String> regexes = new ArrayList<String>();
         if (territoryCoords.contains("&&")) {
-            String[] regexes = territoryCoords.split("&&");
-            for (String regex : regexes) {
-                regex = regex.trim();
+            regexes = new ArrayList<String>(Arrays.asList(territoryCoords.split("&&")));
+        }
+        else {
+            regexes.add(territoryCoords);
+        }
+            
+        for (String regex : regexes) {
+            regex = regex.trim();
 
-                //for addresses in which the number is greater than or equal to 10 and the letter changes
-                if (regex.matches("[A-Q]-[A-Q]") && regex.matches("1[0-2]")) {
-                    int startLetter = convertLetterToNum(regex.charAt(1));
-                    int endLetter = convertLetterToNum(regex.charAt(3));
+            //for addresses in which the number is greater than or equal to 10 and the letter changes
+            if (regex.matches(".*[A-Q]-[A-Q].*") && regex.matches(".*1[0-2].*")) {
+                int startLetter = convertLetterToNum(regex.charAt(1));
+                int endLetter = convertLetterToNum(regex.charAt(3));
+                for (int column = startLetter; column <= endLetter; column++) {
+                    Map.getColors()[Integer.parseInt(regex.substring(5))][column] = color;
+                }
+            }
+
+            //for addresses in which both the letter and the number change
+            else if (regex.matches(".*[A-Q]-[A-Q].*") && regex.matches(".*[0-9]-[0-9].*")) {
+                int startLetter = convertLetterToNum(regex.charAt(1));
+                int endLetter = convertLetterToNum(regex.charAt(3));
+                for (int row = Integer.parseInt(regex.substring(6, 7)); row <= Integer.parseInt(regex.substring(8, 9)); row++) {
                     for (int column = startLetter; column <= endLetter; column++) {
-                        Map.getColors()[Integer.parseInt(regex.substring(5))][column] = color;
-                    }
-                }
-
-                //for addresses in which both the letter and the number change
-                else if (regex.matches("[A-Q]-[A-Q].*") && regex.matches("[0-9]-[0-9]")) {
-                    int startLetter = convertLetterToNum(regex.charAt(1));
-                    int endLetter = convertLetterToNum(regex.charAt(3));
-                    for (int row = regex.charAt(6); row <= regex.charAt(8); row++) {
-                        for (int column = startLetter; column <= endLetter; column++) {
-                            Map.getColors()[row][column] = color;
-                        }
-                    }
-                }
-                //for addresses in which only the letters change
-                else if (regex.matches("[A-Q]-[A-Q]")) {
-                    int start = convertLetterToNum(regex.charAt(1));
-                    int end = convertLetterToNum(regex.charAt(3));
-                    for (int column = start; column <= end; column++) {
-                        Map.getColors()[regex.charAt(regex.lastIndexOf("]") - 1)][column] = color;
-                    }
-                }
-
-                //for addresses in which only the numbers change
-                else if (regex.matches("[0-9]-[0-9]")) {
-                    int column = convertLetterToNum(regex.charAt(1));
-                    for (int row = regex.charAt(4); row <= regex.charAt(6); row++) {
                         Map.getColors()[row][column] = color;
                     }
                 }
-
-                //for addresses already in coordinate form (<Letter><Number>)
-                else {
-                    int column = convertLetterToNum(regex.charAt(0));
-                    Map.getColors()[Integer.parseInt(regex.substring(1))][column] = color;
+            }
+                
+            //for addresses in which only the letters change
+            else if (regex.matches(".*[A-Q]-[A-Q].*")) {
+                int start = convertLetterToNum(regex.charAt(1));
+                int end = convertLetterToNum(regex.charAt(3));
+                for (int column = start; column <= end; column++) {
+                    Map.getColors()[regex.charAt(regex.lastIndexOf("]") - 1)][column] = color;
                 }
+            }
+
+            //for addresses in which only the numbers change
+            else if (regex.matches(".*[0-9]-[0-9].*")) {
+                int column = convertLetterToNum(regex.charAt(1));
+                for (int row = Integer.parseInt(regex.substring(4, 5)); row <= Integer.parseInt(regex.substring(6, 7)); row++) {
+                    Map.getColors()[row][column] = color;
+                }
+            }
+
+            //for addresses already in coordinate form (<Letter><Number>)
+            else {
+                int column = convertLetterToNum(regex.charAt(0));
+                Map.getColors()[Integer.parseInt(regex.substring(1, 2))][column] = color;
             }
         }
     }
 
-    public void changeTroops(String territoryName, int troops) {
+    public static void changeTroops(String territoryName, int troops) {
         String territoryCoords = getTerritoryCoords(territoryName);
+        ArrayList<String> regexes = new ArrayList<String>();
         if (territoryCoords.contains("&&")) {
-            String[] regexes = territoryCoords.split("&&");
-            for (String regex : regexes) {
-                regex = regex.trim();
+            regexes = new ArrayList<String>(Arrays.asList(territoryCoords.split("&&")));
+        }
+        else {
+            regexes.add(territoryCoords);
+        }
 
-                //for addresses in which the number is greater than or equal to 10 and the letter changes
-                if (regex.matches("[A-Q]-[A-Q]") && regex.matches("1[0-2]")) {
-                    int startLetter = convertLetterToNum(regex.charAt(1));
-                    int endLetter = convertLetterToNum(regex.charAt(3));
+        for (String regex : regexes) {
+            regex = regex.trim();
+
+            //for addresses in which the number is greater than or equal to 10 and the letter changes
+            if (regex.matches(".*[A-Q]-[A-Q].*") && regex.matches(".*1[0-2].*")) {
+                int startLetter = convertLetterToNum(regex.charAt(1));
+                int endLetter = convertLetterToNum(regex.charAt(3));
+                for (int column = startLetter; column <= endLetter; column++) {
+                    Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = String.valueOf(Map.getTroops()[Integer.parseInt(regex.substring(5))][column] + troops);
+                }
+            }
+
+            //for addresses in which both the letter and the number change
+            else if (regex.matches(".*[A-Q]-[A-Q].*") && regex.matches(".*[0-9]-[0-9].*")) {
+                int startLetter = convertLetterToNum(regex.charAt(1));
+                int endLetter = convertLetterToNum(regex.charAt(3));
+                for (int row = Integer.parseInt(regex.substring(6, 7)); row <= Integer.parseInt(regex.substring(8, 9)); row++) {
                     for (int column = startLetter; column <= endLetter; column++) {
-                        Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = troops;
+                        Map.getTroops()[row][column] = String.valueOf(Map.getTroops()[row][column] + troops);
                     }
                 }
+            }
+                
+            //for addresses in which only the letters change
+            else if (regex.matches(".*[A-Q]-[A-Q].*")) {
+                int start = convertLetterToNum(regex.charAt(1));
+                int end = convertLetterToNum(regex.charAt(3));
+                for (int column = start; column <= end; column++) {
+                    Map.getTroops()[regex.charAt(regex.lastIndexOf("]") - 1)][column] = String.valueOf(Map.getTroops()[regex.charAt(regex.lastIndexOf("]") - 1)][column] + troops);
+                }
+            }
 
-                //for addresses in which both the letter and the number change
-                else if (regex.matches("[A-Q]-[A-Q].*") && regex.matches("[0-9]-[0-9]")) {
-                    int startLetter = convertLetterToNum(regex.charAt(1));
-                    int endLetter = convertLetterToNum(regex.charAt(3));
-                    for (int row = regex.charAt(6); row <= regex.charAt(8); row++) {
-                        for (int column = startLetter; column <= endLetter; column++) {
-                            Map.getTroops()[row][column] = troops;
-                        }
-                    }
+            //for addresses in which only the numbers change
+            else if (regex.matches(".*[0-9]-[0-9].*")) {
+                int column = convertLetterToNum(regex.charAt(1));
+                for (int row = Integer.parseInt(regex.substring(4, 5)); row <= Integer.parseInt(regex.substring(6, 7)); row++) {
+                    Map.getTroops()[row][column] = String.valueOf(Map.getTroops()[row][column] + troops);
                 }
-                //for addresses in which only the letters change
-                else if (regex.matches("[A-Q]-[A-Q]")) {
-                    int start = convertLetterToNum(regex.charAt(1));
-                    int end = convertLetterToNum(regex.charAt(3));
-                    for (int column = start; column <= end; column++) {
-                        Map.getTroops()[regex.charAt(regex.lastIndexOf("]") - 1)][column] = troops;
-                    }
-                }
+            }
 
-                //for addresses in which only the numbers change
-                else if (regex.matches("[0-9]-[0-9]")) {
-                    int column = convertLetterToNum(regex.charAt(1));
-                    for (int row = regex.charAt(4); row <= regex.charAt(6); row++) {
-                        Map.getTroops()[row][column] = troops;
-                    }
-                }
-
-                //for addresses already in coordinate form (<Letter><Number>)
-                else {
-                    int column = convertLetterToNum(regex.charAt(0));
-                    Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = troops;
-                }
+            //for addresses already in coordinate form (<Letter><Number>)
+            else {
+                int column = convertLetterToNum(regex.charAt(0));
+                Map.getTroops()[Integer.parseInt(regex.substring(1, 2))][column] = String.valueOf(Map.getTroops()[Integer.parseInt(regex.substring(1))][column] + troops);
             }
         }
     }
