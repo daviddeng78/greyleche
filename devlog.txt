@@ -11,7 +11,9 @@ Terminal Version of Game Risk
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow we so BOSS bc...
+
+Error: added the same instance to an arraylist causing all elements to be the same. 
+Fixed by creating initialization into the for loop
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
