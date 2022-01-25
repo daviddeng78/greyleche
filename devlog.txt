@@ -7,24 +7,6 @@ pd 7
 Terminal Version of Game Risk
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-USAGE:
-* Replace all fields, angle brackets included, with specified info.
-  eg, pd <pd#> --> pd 3
-* Delete this instruction block once all teammates understand usage.
-
-devlog--
-Use keyboard shortcut to jump to end,
- replicate entry template,
- modify appropriately.
-
-zone of reflection--
-Flesh out each category whenever necessary, appropriate.
- Need not be fully filled in until end of project,
- but best done as you go along.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
 OBSTACLES OVERCOME
@@ -33,22 +15,24 @@ wow we so BOSS bc...
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
+The method play in Game.Java does not run because it states that player is not initialized.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo!...
+We can read a txt file and implement it into our java file using a filerreader. 
+This makes it so that our code is much more short, and helps save time.
+
+Switch is a nice alternative to if statements at times, it is more shorter to write.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-we changed ___ to ___ bc...
+we changed the arrToString method from changing the color to making a seperate string color array to make it easier to manipulate and make the arrToString method shorter.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
-
+Manage time more wisely and allocate more time to projects in the future.
 
 
  ______   ______   __   __   __       ______   _______     
@@ -87,3 +71,7 @@ David:: Created 'territories.txt' to hold territory info. Integrated this file i
 
 2022-01-24
 David:: Fixed color and troop update methods for some coordinates. 
+May:: Created v0 version of the instructions page.
+
+2022-01-23
+May:: Attempted to change the color of the territories to the color of the person who owned the array. Worked on map arrays. 

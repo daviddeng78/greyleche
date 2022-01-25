@@ -29,7 +29,7 @@ public class Map extends Helpers {
                 {PURPLE,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,"","",CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN},
                 {PURPLE,"","",CYAN,CYAN,"",CYAN,"","","","","","","","","","",CYAN},
                 {PURPLE,CYAN,"",CYAN,CYAN,"","",CYAN,"","",CYAN,"","","","","","",CYAN},
-                {PURPLE,"","","","",CYAN,"","",CYAN,CYAN,"",CYAN,"","","","0",CYAN,CYAN},
+                {PURPLE,"","","","",CYAN,"","",CYAN,CYAN,"",CYAN,"","","",CYAN,CYAN,CYAN},
                 {PURPLE,"","","","","",CYAN,"","","","",CYAN,"","","","","",CYAN},
                 {PURPLE,"","",CYAN,CYAN,"","",CYAN,"","","","","","","","",CYAN,CYAN},
     };
@@ -45,11 +45,11 @@ public class Map extends Helpers {
         {"7","-1","-1","-1","-1","-1","-1","-1","0","0","-1","-1","-1","-1","-1","-1","-1","-1"},
         {"8","0","0","-1","-1","0","-1","0","0","0","0","0","0","0","0","0","0","-1"},
         {"9","-1","0","-1","-1","0","0","-1","0","0","-1","0","0","0","0","0","0","-1"},
-        {"1-1","0","0","0","0","-1","0","0","-1","-1","0","-1","0","0","0","-1","-1","-1"},
+        {"10","-1","0","0","0","0","-1","0","0","-1","-1","0","-1","0","0","0","-1","-1","-1"},
         {"11","0","0","0","0","0","-1","0","0","0","0","-1","0","0","0","0","0","-1"},
         {"12","0","0","-1","-1","0","0","-1","0","0","0","0","0","0","0","0","-1","-1"},
     };
-    
+
     private static String[] territoryAddresses = new String[37];
     private static String[] territories = new String[37];
     private static String[] adjacencies = new String[37];
