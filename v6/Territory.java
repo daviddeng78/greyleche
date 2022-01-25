@@ -26,10 +26,20 @@ public class Territory extends Helpers {
     public static String getTerritoryName(String coordinate) {
         //coordinates are in <Letter><Number> form
         String territory = "";
+        ArrayList<String> allPossibleCoords = new ArrayList<String>();
         for (int i = 0; i < Map.getAddresses().length; i++) {
-            if (coordinate.matches(Map.getAddresses()[i])) {
-                territory = Map.getTerritory()[i];
-                break;
+            if (Map.getAddresses()[i].contains("&&")) {
+                allPossibleCoords = new ArrayList<String>(Arrays.asList(Map.getAddresses()[i].split("&&")));
+            }
+            else {
+                allPossibleCoords.add(Map.getAddresses()[i]);
+            }
+
+            for (String regex : allPossibleCoords) {
+                if (coordinate.matches(regex)) {
+                    territory = Map.getTerritory()[i];
+                    break;
+                }
             }
         }
         return territory;
