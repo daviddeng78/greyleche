@@ -75,3 +75,5 @@ May:: Attempted to change the color of the territories to the color of the perso
 
 2022-01-24
 David:: Fixed color and troop update methods for some coordinates. 
+May:: Worked on Attack Phase and its helper methods such as isOwned and andRemover(makes it easier to take the adjacencies of a territory)
+Faiyaz:: Worked on Fortify Phase.
