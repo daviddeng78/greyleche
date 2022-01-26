@@ -16,7 +16,7 @@ public class Map extends Helpers {
                 {"8","1","1","0","0","1","0","1","1","1","1","1","1","1","1","1","1","0"},
                 {"9","0","1","0","0","1","1","0","1","1","0","1","1","1","1","1","1","0"},
                 {"10","1","1","1","1","0","1","1","0","0","1","0","1","1","1","0","0","0"},
-                {"11","1","1","1","1","1","0","1","1","1","1","0","1","1","1","1","1","0"},
+                {"11","1","1","1","1","1","0","1","1","0","1","0","1","1","1","1","1","0"},
                 {"12","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","0","0"},
     };
     private static String[][] mapColor  = {
@@ -31,7 +31,7 @@ public class Map extends Helpers {
                 {PURPLE,"","",CYAN,CYAN,"",CYAN,"","","","","","","","","","",CYAN},
                 {PURPLE,CYAN,"",CYAN,CYAN,"","",CYAN,"","",CYAN,"","","","","","",CYAN},
                 {PURPLE,"","","","",CYAN,"","",CYAN,CYAN,"",CYAN,"","","",CYAN,CYAN,CYAN},
-                {PURPLE,"","","","","",CYAN,"","","","",CYAN,"","","","","",CYAN},
+                {PURPLE,"","","","","",CYAN,"","",CYAN,"",CYAN,"","","","","",CYAN},
                 {PURPLE,"","",CYAN,CYAN,"","",CYAN,"","","","","","","","",CYAN,CYAN},
     };
 
@@ -69,9 +69,10 @@ public class Map extends Helpers {
         return mapColor;
     }
 
-    public static String[][] getTroops() {
-        return mapTroop;
-    }
+    public static String[] getTroops() {
+      return troops;
+        }
+
 
     public static String[] getAddresses() {
         return territoryAddresses;
@@ -164,5 +165,6 @@ public class Map extends Helpers {
       setupMapInfoArrays();
       System.out.println(andRemover());
       System.out.println(getTerritory().length);
+      System.out.println(getTroops());
     }
 }
