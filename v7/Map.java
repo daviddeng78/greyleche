@@ -14,8 +14,8 @@ public class Map extends Helpers {
                 {"6","0","0","0","0","0","0","0","1","1","0","0","0","0","0","0","0","0"},
                 {"7","0","0","0","0","0","0","0","1","1","0","0","0","0","0","0","0","0"},
                 {"8","1","1","0","0","1","0","1","1","1","1","1","1","1","1","1","1","0"},
-                {"9","0","1","0","0","1","1","0","1","1","0","1","1","1","1","1","1","0"},
-                {"10","1","1","1","1","0","1","1","0","0","1","0","1","1","1","0","0","0"},
+                {"9","0","1","0","1","1","1","0","1","1","0","1","1","1","1","1","1","0"},
+                {"10","1","1","1","1","0","1","1","0","1","1","0","1","1","1","0","0","0"},
                 {"11","1","1","1","1","1","0","1","1","0","1","0","1","1","1","1","1","0"},
                 {"12","1","1","0","0","1","1","0","1","1","1","1","1","1","1","1","0","0"},
     };
@@ -29,8 +29,8 @@ public class Map extends Helpers {
                 {PURPLE,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,"","",CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN},
                 {PURPLE,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,"","",CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN,CYAN},
                 {PURPLE,"","",CYAN,CYAN,"",CYAN,"","","","","","","","","","",CYAN},
-                {PURPLE,CYAN,"",CYAN,CYAN,"","",CYAN,"","",CYAN,"","","","","","",CYAN},
-                {PURPLE,"","","","",CYAN,"","",CYAN,CYAN,"",CYAN,"","","",CYAN,CYAN,CYAN},
+                {PURPLE,CYAN,"",CYAN,"","","",CYAN,"","",CYAN,"","","","","","",CYAN},
+                {PURPLE,"","","","",CYAN,"","",CYAN,"","",CYAN,"","","",CYAN,CYAN,CYAN},
                 {PURPLE,"","","","","",CYAN,"","",CYAN,"",CYAN,"","","","","",CYAN},
                 {PURPLE,"","",CYAN,CYAN,"","",CYAN,"","","","","","","","",CYAN,CYAN},
     };
@@ -72,7 +72,7 @@ public class Map extends Helpers {
     public static String[][] getTroops() {
         return mapTroop;
     }
-    
+
     public static int getTroopCount(String territory) {
         ArrayList<String> terror = Player.convert(getTerritory());
         int ind = terror.indexOf(territory);
