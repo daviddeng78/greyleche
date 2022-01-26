@@ -59,7 +59,18 @@ public class Player extends Helpers{
     public void initPlace(Player otherPlayer) {
         System.out.println(this.getColor() + this.getName() + RESET + ", enter the address of an unoccupied territory");
         String territoryAddress = sc.next().trim();
-        if (territoryAddress.matches("[A-Q][1-9]") || territoryAddress.matches("[A-Q]1[0-2]")) {
+        if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
+            System.out.println("You can't place troops on water.");
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e) {
+
+            }
+            initPlace(otherPlayer);
+        }
+
+        else if (territoryAddress.matches("[A-Q][1-9]") || territoryAddress.matches("[A-Q]1[0-2]")) {
             String territoryName = Territory.getTerritoryName(territoryAddress);
             if ((!Arrays.asList(this.getTerritoriesOwned().toArray()).contains(territoryName)) && (!Arrays.asList(otherPlayer.getTerritoriesOwned().toArray()).contains(territoryName))) {
                 System.out.println(territoryName + " selected");
@@ -116,6 +127,7 @@ public class Player extends Helpers{
                 initPlace(otherPlayer);
             }
         }
+        
         else {
             initPlace(otherPlayer);
         }

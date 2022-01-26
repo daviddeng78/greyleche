@@ -73,6 +73,10 @@ public class Map extends Helpers {
         return mapTroop;
     }
 
+    public static String[] getWater() {
+        return water;
+    }
+
     public static String[] getAddresses() {
         return territoryAddresses;
     }
