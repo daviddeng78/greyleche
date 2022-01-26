@@ -106,7 +106,7 @@ public class Player extends Helpers{
                         System.out.println(CLEAR);
                         Map.arrToString(Map.getMap());
                     }
-                    
+
                     else {
                         System.out.printf("You only have %s available reinforcements", initReinforcements);
                         this.initPlace(otherPlayer);
@@ -122,12 +122,12 @@ public class Player extends Helpers{
                     Thread.sleep(1000);
                 }
                 catch (InterruptedException e) {
-                    
+
                 }
                 initPlace(otherPlayer);
             }
         }
-        
+
         else {
             initPlace(otherPlayer);
         }
@@ -212,7 +212,7 @@ public class Player extends Helpers{
     public static ArrayList<String> convert(String[] x){
         ArrayList<String> ans = new ArrayList<String>();
         for(int i = 0; i < x.length; i++){
-            ans.add(x[1]);
+            ans.add(x[i]);
         }
         return ans;
     }
@@ -237,9 +237,10 @@ public class Player extends Helpers{
         if( noOfTroop > takeTerritory.getTroops) {
             targetTerritory.troops += noOfTroop;
             System.out.println("Fortifying " + targetTerritory " with " + noOfTroop " troops from " + takeTerritory "!")
-        } 
+        }
         else {
             System.out.println("There are not enough troops to take!")
         }
     }*/
+
 }

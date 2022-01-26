@@ -51,12 +51,12 @@ public class Map extends Helpers {
         {"12","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"},
     };
 
-    private static String[] water = {"N1", "Q1", "E2", "Q2", "B3", "C3", "M3", "Q3", "D4", "E4", "L4", "P4", "A5", "H5", "I5", "J5", "L5", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "J6", "K6", "L6", "M6", "N6", "O6", "P6", "Q6", "A7", "B7", "C7", "D7", "E7", "F7", "G7", "J7", "K7", "L7", "M7", "N7", "O7", "P7", "Q7", "C8", "D8", "F8", "Q8", "A9", "C9", "D9", "G9", "J9", "Q9", "E10", "H10", "I10", "K10", "O10", "P10", "Q10", "F11", "K11", "Q11", "C12", "D12", "G12", "P12", "Q12"};
+    private static String[] water = {"N1", "Q1", "E2", "Q2", "B3", "C3", "M3", "Q3", "D4", "E4", "L4", "P4", "A5", "H5", "I5", "J5", "L5", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "J6", "K6", "L6", "M6", "N6", "O6", "P6", "Q6", "A7", "I11","B7", "C7", "D7", "E7", "F7", "G7", "J7", "K7", "L7", "M7", "N7", "O7", "P7", "Q7", "C8", "D8", "F8", "Q8", "A9", "C9", "D9", "G9", "J9", "Q9", "E10", "H10", "I10", "K10", "O10", "P10", "Q10", "F11", "K11", "Q11", "C12", "D12", "G12", "P12", "Q12"};
 
     private static String[] territoryAddresses = new String[37];
     private static String[] territories = new String[37];
     private static String[] adjacencies = new String[37];
-
+    private static int[] troops = new int[37];
     public Map() {
 
     }
@@ -69,10 +69,21 @@ public class Map extends Helpers {
         return mapColor;
     }
 
-    public static String[] getTroops() {
-      return troops;
+    public static int getTroopCount(String territory) {
+      ArrayList<String> terror = Player.convert(getTerritory());
+      int ind = terror.indexOf(territory);
+      return troops[ind];
         }
 
+    public static void setTroop(String territoryName, int troopCount){
+      ArrayList<String> terror = Player.convert(getTerritory());
+      int ind = terror.indexOf(territoryName);
+      troops[ind] = troopCount;
+    }
+
+    public static String[][] getTroops(){
+      return mapTroop;
+    }
 
     public static String[] getWater() {
         return water;
@@ -169,6 +180,6 @@ public class Map extends Helpers {
       setupMapInfoArrays();
       System.out.println(andRemover());
       System.out.println(getTerritory().length);
-      System.out.println(getTroops());
+      System.out.println(getTroopCount("China"));
     }
 }

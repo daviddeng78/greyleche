@@ -60,7 +60,7 @@ public class Territory extends Helpers {
         else {
             regexes.add(territoryCoords);
         }
-            
+
         for (String regex : regexes) {
             regex = regex.trim();
 
@@ -83,7 +83,7 @@ public class Territory extends Helpers {
                     }
                 }
             }
-                
+
             //for addresses in which only the letters change
             else if (regex.matches(".*[A-Q]-[A-Q].*")) {
                 int start = convertLetterToNum(regex.charAt(1));
@@ -118,7 +118,7 @@ public class Territory extends Helpers {
         else {
             regexes.add(territoryCoords);
         }
-
+        Map.setTroop(territoryName, troops);
         for (String regex : regexes) {
             regex = regex.trim();
 
@@ -141,7 +141,7 @@ public class Territory extends Helpers {
                     }
                 }
             }
-                
+
             //for addresses in which only the letters change
             else if (regex.matches(".*[A-Q]-[A-Q].*")) {
                 int start = convertLetterToNum(regex.charAt(1));
