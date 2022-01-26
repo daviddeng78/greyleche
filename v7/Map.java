@@ -69,9 +69,9 @@ public class Map extends Helpers {
         return mapColor;
     }
 
-    public static String[] getTroops() {
-      return troops;
-        }
+    public static String[][] getTroops() {
+      return mapTroop;
+    }
 
 
     public static String[] getWater() {

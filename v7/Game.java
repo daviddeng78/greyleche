@@ -2,17 +2,14 @@ import java.util.Scanner;
 
 public class Game extends Helpers {
 
-    private static boolean initPlacement;
+    private boolean gameOver;
     Scanner sc;
-
-    public static boolean getInitPlacementStatus() {
-        return initPlacement;
-    }
 
     public Game() {
         Player p1 = new Player();
         Player p2 = new Player();
         sc = new Scanner(System.in);
+        gameOver = false;
         start(p1, p2);
     }
 
@@ -40,7 +37,7 @@ public class Game extends Helpers {
         }
     }
 
-    public static void setup(Player p1, Player p2) {
+    public void setup(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println(RED + "SETUP GAME" + RESET);
         divider();
@@ -78,7 +75,7 @@ public class Game extends Helpers {
         play(p1, p2);
     }
 
-    public static void play(Player p1, Player p2) {
+    public void play(Player p1, Player p2) {
         System.out.println(CLEAR);
         System.out.println("Starting game...");
         try {
@@ -90,9 +87,13 @@ public class Game extends Helpers {
         System.out.println(CLEAR);
         System.out.println(Map.arrToString(Map.getMap()));
         System.out.println("Starting initial placement...");
-        while (p1.getInitReinforcements() != 0 && p2.getInitReinforcements() != 0) {
+        while (p1.getNumberReinforcements() != 0 && p2.getNumberReinforcements() != 0) {
             p1.initPlace(p2);
             p2.initPlace(p1);
+        }
+        while (!gameOver) {
+            p1.place(p2);
+            p2.place(p1);
         }
     }
 
