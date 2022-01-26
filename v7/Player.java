@@ -96,15 +96,8 @@ public class Player extends Helpers{
                     try {
                         Thread.sleep(1000);
                     }
-<<<<<<< HEAD
                     catch (InterruptedException e) {
-                        
-=======
 
-                    else {
-                        System.out.printf("You only have %s available reinforcements", initReinforcements);
-                        this.initPlace(otherPlayer);
->>>>>>> 4dbdc1d67f157fc43e11ebd1a91b3a27c971ac01
                     }
                     initPlace(otherPlayer);
                 }
@@ -126,13 +119,9 @@ public class Player extends Helpers{
 
                     }
                 }
-<<<<<<< HEAD
                 else {
-                    initPlace(otherPlayer);
-=======
-                catch (InterruptedException e) {
-
->>>>>>> 4dbdc1d67f157fc43e11ebd1a91b3a27c971ac01
+                    System.out.printf("You only have %s available reinforcements", reinforcements);
+                    this.initPlace(otherPlayer);
                 }
             }
             System.out.println(CLEAR);

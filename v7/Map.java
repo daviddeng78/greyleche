@@ -85,10 +85,6 @@ public class Map extends Helpers {
       troops[ind] = troopCount;
     }
 
-    public static String[][] getTroops(){
-      return mapTroop;
-    }
-
     public static String[] getWater() {
         return water;
     }
