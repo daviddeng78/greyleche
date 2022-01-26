@@ -1,15 +1,10 @@
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Territory extends Helpers {
     private int[] troops = new int[37];
     private String[] color = new String[37];
     private boolean[] isSelected;
-
-    public Territory() {
-        Scanner sc = new Scanner(System.in);
-    }
 
     public int[] getTroops() {
         return troops;
@@ -34,7 +29,6 @@ public class Territory extends Helpers {
             else {
                 allPossibleCoords.add(Map.getAddresses()[i]);
             }
-
             for (String regex : allPossibleCoords) {
                 regex = regex.trim();
                 if (coordinate.matches(regex)) {
@@ -110,7 +104,7 @@ public class Territory extends Helpers {
             //for addresses already in coordinate form (<Letter><Number>)
             else {
                 int column = convertLetterToNum(regex.charAt(0));
-                Map.getColors()[Integer.parseInt(regex.substring(1, 2))][column] = color;
+                Map.getColors()[Integer.parseInt(regex.substring(1))][column] = color;
             }
         }
     }
@@ -168,7 +162,7 @@ public class Territory extends Helpers {
             //for addresses already in coordinate form (<Letter><Number>)
             else {
                 int column = convertLetterToNum(regex.charAt(0));
-                Map.getTroops()[Integer.parseInt(regex.substring(1, 2))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) + troops);
+                Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) + troops);
             }
         }
     }

@@ -74,6 +74,10 @@ public class Map extends Helpers {
         }
 
 
+    public static String[] getWater() {
+        return water;
+    }
+
     public static String[] getAddresses() {
         return territoryAddresses;
     }

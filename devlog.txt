@@ -81,4 +81,4 @@ May:: Worked on Attack Phase and its helper methods such as isOwned and andRemov
 Faiyaz:: Worked on Fortify Phase.
 
 2022-01-25
-David:: Initial placement method works for all territories with coordinates with row < 10.
+David:: Initial placement method works for all territories. Integrated water into program.
