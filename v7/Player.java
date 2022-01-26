@@ -96,8 +96,15 @@ public class Player extends Helpers{
                     try {
                         Thread.sleep(1000);
                     }
+<<<<<<< HEAD
                     catch (InterruptedException e) {
                         
+=======
+
+                    else {
+                        System.out.printf("You only have %s available reinforcements", initReinforcements);
+                        this.initPlace(otherPlayer);
+>>>>>>> 4dbdc1d67f157fc43e11ebd1a91b3a27c971ac01
                     }
                     initPlace(otherPlayer);
                 }
@@ -119,14 +126,19 @@ public class Player extends Helpers{
 
                     }
                 }
+<<<<<<< HEAD
                 else {
                     initPlace(otherPlayer);
+=======
+                catch (InterruptedException e) {
+
+>>>>>>> 4dbdc1d67f157fc43e11ebd1a91b3a27c971ac01
                 }
             }
             System.out.println(CLEAR);
             System.out.println(Map.arrToString(Map.getMap()));
         }
-        
+
         else {
             initPlace(otherPlayer);
         }
@@ -222,7 +234,7 @@ public class Player extends Helpers{
     public static ArrayList<String> convert(String[] x){
         ArrayList<String> ans = new ArrayList<String>();
         for(int i = 0; i < x.length; i++){
-            ans.add(x[1]);
+            ans.add(x[i]);
         }
         return ans;
     }
@@ -247,9 +259,10 @@ public class Player extends Helpers{
         if( noOfTroop > takeTerritory.getTroops) {
             targetTerritory.troops += noOfTroop;
             System.out.println("Fortifying " + targetTerritory " with " + noOfTroop " troops from " + takeTerritory "!")
-        } 
+        }
         else {
             System.out.println("There are not enough troops to take!")
         }
     }*/
+
 }
