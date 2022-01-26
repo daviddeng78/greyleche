@@ -82,3 +82,4 @@ Faiyaz:: Worked on Fortify Phase.
 
 2022-01-25
 David:: Initial placement method works for all territories. Integrated water into program. Progress on placement method.
+May:: Fixed map and territory error, and wrote the troop count method.
