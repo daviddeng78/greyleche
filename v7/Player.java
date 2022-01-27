@@ -14,7 +14,7 @@ public class Player extends Helpers{
     public Player() {
         resigned = false;
         numberTerritories = 0;
-        reinforcements = 1;
+        reinforcements = 40;
         sc = new Scanner(System.in);
         territoriesOwned = new ArrayList<String>();
     }
@@ -347,30 +347,53 @@ public class Player extends Helpers{
         return ans;
     }
 
-    /*public void fortify() {
-        Scanner take = new Scanner(System.in);
+    public void fortify(Player otherPlayer) {
         System.out.println("Please enter the coordinates of the territory from where you wish to take troops from.");
-        String takeTerritory = Territory.getTerritoryName(take.nextline());
-
-        Scanner troop = new Scanner(System.in);
-        System.out.println("Please enter the number of troops you wish to take.");
-        int noOfTroop = troop.nextInt;
-
-        Scanner fort = new Scanner(System.in);
-        System.out.println("Please enter the coordinates of the territory from which you wish to fortify");
-        String targetTerritory = Territory.getTerritoryName(fort.nextline());
-
-        if(takeTerritory.equals(targetTerritory) ){
-            System.out.println("You cannot fortify the same territory you wish to take troops from!");
+        String territoryAddress = sc.next();
+        String territoryName = Territory.getTerritoryName(territoryAddress);
+        if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
+            System.out.println("You can't place troops on water");
         }
 
-        if( noOfTroop > takeTerritory.getTroops) {
-            targetTerritory.troops += noOfTroop;
-            System.out.println("Fortifying " + targetTerritory " with " + noOfTroop " troops from " + takeTerritory "!")
+        else if (Arrays.asList(this.territoriesOwned.toArray()).contains(territoryName)) {
+            System.out.println("Please enter the number of troops you wish to take.");
+            int troops = sc.nextInt();
+            if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops >= 3) {
+                System.out.println("Please enter the coordinates of the territory which you wish to fortify");
+                String targetTerritoryName = Territory.getTerritoryName(sc.next());
+                if (targetTerritoryName.equals(territoryName)) {
+                    System.out.println("You cannot fortify the same territory you wish to take troops from!");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+                        
+                    }
+                    fortify(otherPlayer);
+                }
+                else if (!(Arrays.asList(this.territoriesOwned.toArray()).contains(targetTerritoryName))) {
+                    System.out.println("You cannot fortify a territory that is not your own.");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+
+                    }
+                    fortify(otherPlayer);
+                }
+                else {
+                    
+                }
         }
         else {
-            System.out.println("There are not enough troops to take!")
-        }
-    }*/
+            System.out.println("You cannot fortify a territory that is not your own.");
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e) {
 
+            }
+            fortify(otherPlayer);
+        }
+    }
 }

@@ -109,7 +109,7 @@ public class Territory extends Helpers {
         }
     }
 
-    public static void changeTroops(String territoryName, int troops) {
+    public static void changeTroops(String territoryName, int troops, boolean addOrSubtract) {
         String territoryCoords = getTerritoryCoords(territoryName);
         ArrayList<String> regexes = new ArrayList<String>();
         if (territoryCoords.contains("&&")) {
@@ -118,7 +118,7 @@ public class Territory extends Helpers {
         else {
             regexes.add(territoryCoords);
         }
-        Map.setTroop(territoryName, troops);
+        
         for (String regex : regexes) {
             regex = regex.trim();
 
@@ -127,7 +127,12 @@ public class Territory extends Helpers {
                 int startLetter = convertLetterToNum(regex.charAt(1));
                 int endLetter = convertLetterToNum(regex.charAt(3));
                 for (int column = startLetter; column <= endLetter; column++) {
-                    Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(5))][column]) + troops);
+                    if (addOrSubtract == true) {
+                        Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(5))][column]) + troops);
+                    }
+                    else {
+                        Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(5))][column]) - troops);
+                    }
                 }
             }
 
@@ -137,7 +142,12 @@ public class Territory extends Helpers {
                 int endLetter = convertLetterToNum(regex.charAt(3));
                 for (int row = Integer.parseInt(regex.substring(6, 7)); row <= Integer.parseInt(regex.substring(8, 9)); row++) {
                     for (int column = startLetter; column <= endLetter; column++) {
-                        Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
+                        if (addOrSubtract == true) {
+                            Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
+                        }
+                        else {
+                            Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) - troops);
+                        }
                     }
                 }
             }
@@ -147,7 +157,12 @@ public class Territory extends Helpers {
                 int start = convertLetterToNum(regex.charAt(1));
                 int end = convertLetterToNum(regex.charAt(3));
                 for (int column = start; column <= end; column++) {
-                    Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column]) + troops);
+                    if (addOrSubtract == true) {
+                        Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column]) + troops);
+                    }
+                    else {
+                        Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column]) - troops);
+                    }
                 }
             }
 
@@ -155,14 +170,24 @@ public class Territory extends Helpers {
             else if (regex.matches(".*[0-9]-[0-9].*")) {
                 int column = convertLetterToNum(regex.charAt(1));
                 for (int row = Integer.parseInt(regex.substring(4, 5)); row <= Integer.parseInt(regex.substring(6, 7)); row++) {
-                    Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
+                    if (addOrSubtract == false) {
+                        Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
+                    }
+                    else {
+                        Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) - troops);
+                    }
                 }
             }
 
             //for addresses already in coordinate form (<Letter><Number>)
             else {
                 int column = convertLetterToNum(regex.charAt(0));
-                Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) + troops);
+                if (addOrSubtract == true) {
+                    Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) + troops);
+                }
+                else {
+                    Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) - troops);
+                }
             }
         }
     }
