@@ -87,7 +87,7 @@ public class Game extends Helpers {
         System.out.println(CLEAR);
         System.out.println(Map.arrToString(Map.getMap()));
         System.out.println("Starting initial placement...");
-        while (p1.getNumberReinforcements() != 0 && p2.getNumberReinforcements() != 0) {
+        while (p1.getNumberReinforcements() != 0 || p2.getNumberReinforcements() != 0) {
             p1.initPlace(p2);
             p2.initPlace(p1);
         }
