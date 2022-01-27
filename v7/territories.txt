@@ -27,7 +27,7 @@ P8 && [N-P][9] : Tanzania -> Faiyaz’s Land and Kenya, 0, 0, David’s land
 A10 && A11 && B9 && B10: Burma -> 0, United Kingdom, South Korea, Colombia
 [H-I][9] && [I-J]10: South Africa ->  0, Thailand and France, 0, Argentina
 [K-M][9] && [L-M]10: Kenya -> 0, Faiyaz’s Land, Tanzania and David’s Land, Ukraine
-9D && [C-D]10 && [C-D]11: South Korea -> Burma and Colombia, 0, Sudan, 0
+D9 && [C-D]10 && [C-D]11: South Korea -> Burma and Colombia, 0, Sudan, 0
 [F-G]10 && [G-H]11: Spain -> 0, Italy, 0, Argentina
 N10 && N11 && N12 && O12: David’s Land -> Kenya and Ukraine, Tanzania, New Zealand, 0
 B11 && [A-B]12: Colombia -> Burma, Burma, South Korea, 0
