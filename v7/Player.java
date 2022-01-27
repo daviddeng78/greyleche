@@ -80,7 +80,7 @@ public class Player extends Helpers{
                     if ((!Arrays.asList(this.getTerritoriesOwned().toArray()).contains(territoryName)) && (!Arrays.asList(otherPlayer.getTerritoriesOwned().toArray()).contains(territoryName))) {
                         System.out.println("Placing 1 troop on " + territoryName);
                         Territory.changeColor(territoryName, this.getColor());
-                        Territory.changeTroops(territoryName, 1);
+                        Territory.changeTroops(territoryName, 1, true);
                         Map.setTroop(territoryName, Map.getTroopCount(territoryName)+1);
                         this.reinforcements -= 1;
                         this.territoriesOwned.add(territoryName);
@@ -133,7 +133,7 @@ public class Player extends Helpers{
                         if (troops <= reinforcements) {
                             System.out.printf("Placing %d on %s\n", troops, territoryName);
                             Territory.changeColor(territoryName, this.getColor());
-                            Territory.changeTroops(territoryName, troops);
+                            Territory.changeTroops(territoryName, troops, true);
                             Map.setTroop(territoryName, Map.getTroopCount(territoryName) + troops);
                             this.reinforcements -= troops;
                             System.out.printf("You now have %s reinforcements left", this.reinforcements);
@@ -207,7 +207,7 @@ public class Player extends Helpers{
                 int troops = sc.nextInt();
                 if (troops <= this.reinforcements) {
                     Territory.changeColor(territory, this.getColor());
-                    Territory.changeTroops(territory, troops);
+                    Territory.changeTroops(territory, troops, true);
                     this.reinforcements -= troops;
                     System.out.printf("You now have %s reinforcements left", this.reinforcements);
                     try {
