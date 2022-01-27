@@ -179,15 +179,28 @@ public class Player extends Helpers{
     
 
     public void place(Player otherPlayer) {
-        this.reinforcements = numberTerritories() / 3;
+        this.reinforcements = this.numberTerritories / 3;
         System.out.printf(getColor() + getName() + RESET + " gained %d troops this round. Entering placement period...\n\n", reinforcements);
         while (this.reinforcements != 0) {
             System.out.println(getColor() + getName() + RESET + ", enter the address of a territory");
             String territoryAddress = sc.next().trim();
             String territory = Territory.getTerritoryName(territoryAddress);
 
-            if (Arrays.asList(getTerritoriesOwned()).contains(territory)) {
-                System.out.printf("%s selected", territory);
+            if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
+                System.out.println("You can't place troops on water.");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+            
+                    }
+                    System.out.println(CLEAR);
+                    System.out.println(Map.arrToString(Map.getMap()));
+                    place(otherPlayer);
+            }
+
+            else if (Arrays.asList(this.territoriesOwned.toArray()).contains(territory)) {
+                System.out.printf("%s selected\n", territory);
                 System.out.println("How many troops would you like to place here?");
                 int troops = sc.nextInt();
                 if (troops <= this.reinforcements) {
@@ -201,6 +214,15 @@ public class Player extends Helpers{
                     catch (InterruptedException e) {
 
                     }
+                }
+            }
+            else {
+                System.out.println("You don't own this territory!");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+
                 }
             }
             System.out.println(CLEAR);
