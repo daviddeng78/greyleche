@@ -86,3 +86,4 @@ May:: Fixed map and territory error, and wrote the troop count method.
 
 2022-01-26
 David:: Refactored initPlacement method to send correct message. Minor formatiing changes to placement method. Synced territories.txt with water array. Finished placement method.
+May:: Completed attack and incorporated it into the game. 
