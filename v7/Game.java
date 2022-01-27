@@ -63,7 +63,7 @@ public class Game extends Helpers {
             Thread.sleep(1000);
         }
         catch (InterruptedException e) {
-            
+
         }
         System.out.println("SETUP COMPLETE!");
         try {
@@ -93,7 +93,9 @@ public class Game extends Helpers {
         }
         while (!gameOver) {
             p1.place(p2);
+            p1.attack(p2);
             p2.place(p1);
+            p2.attack(p1);
         }
     }
 
