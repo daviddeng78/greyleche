@@ -35,7 +35,7 @@ LESSONS LEARNED
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
 Manage time more wisely and allocate more time to projects in the future.
-
+When testing code, it's important to test it exactly how it's played instead of a smaller model of the game since smaller depictions of the game may not be as efficient in finding bugs as the complete game.
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -90,6 +90,7 @@ May:: Completed attack and incorporated it into the game along with small map er
 
 2022-01-27
 David:: Refactored changeTroops method to allow for subtracting of troops as well. Finished with fortify method. Refactored placement method to solve new bugs that arose during testing.
+May:: Worked on attack, it worked except it printed the wrong number of dispatches. Updated territoryOwned array so that it would work with the other two phases
 
 2022-01-28
 David:: Created new helper method that would help with finding adjacent territories during attack phase. Major progress on attack method and created way to end game by player demand midgame.
