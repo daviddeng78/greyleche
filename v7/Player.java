@@ -272,7 +272,7 @@ public class Player extends Helpers{
 
                     }
                 }
-                else if (Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1, 2))][convertLetterToNum(attackingTerritoryAddress.charAt(0))].equals("1")) {
+                else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]) == 1) {
                     System.out.println("You're taking the term one-man army too seriously");
                     try {
                         Thread.sleep(1000);
@@ -286,7 +286,7 @@ public class Player extends Helpers{
                     String[] adjacencyNames = Territory.getTerritoryAdjacencies(attackingTerritoryName).split(", ");
                     ArrayList<String> possibleAttackDestinations = new ArrayList<String>();
                     for (String name : adjacencyNames) {
-                        if (otherPlayer.territoriesOwned.contains(name)) {
+                        if (otherPlayer.territoriesOwned.contains(name) && !Arrays.asList(possibleAttackDestinations.toArray()).contains(attackingTerritoryName)) {
                             possibleAttackDestinations.add(name);
                         }
                     }
@@ -297,7 +297,7 @@ public class Player extends Helpers{
                             Thread.sleep(1000);
                         }
                         catch (InterruptedException e) {
-                            
+
                         }
                     }
                     else {
