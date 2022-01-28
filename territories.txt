@@ -1,0 +1,37 @@
+[A][1-4]: China -> 0, 0, India and Egypt, 0
+[B-C][1-2]: India -> China, 0, United States and May’s Land, 0
+[D-H][1]: United States -> India, 0, Indonesia, May’s Land and Bangladesh and Russia
+[I-K][1] && J2 : Indonesia -> United States and Russia, 0, Pakistan, Philippines
+K2 && [L-M][1-2] : Pakistan -> Indonesia, 0 ,Nigeria, Philippines
+N2 && [O][1-2]: Nigeria -> Pakistan, 0 , Brazil, Ethiopia
+[P][1-3]: Brazil -> Nigeria and Ethiopia, 0, 0, 0
+[D][2-3] && E3 : May’s Land  -> India, United States, Bangladesh, 0
+[F][2-3] && G2 : Bangladesh ->May’s Land, United States, Russia and Mexico, Mexico
+[H-I][2]: Russia -> Bangladesh, United States and Indonesia, Mexico and Japan
+[G-H][3] && [F-H][4]: Mexico -> Bangladesh, Bangladesh and Russia, Japan, Turkey
+[I][3-4] && J4: Japan -> Mexico, Russia, Philippines and Congo, 0
+[J-L][3]: Philippines ->  Japan, Indonesia and Pakistan, 0, Congo
+[N-O][3] && [M-O][4]: Ethiopia -> 0, Nigeria, Brazil, Germany
+[B-C][4]: Egypt -> China, 0, 0, Iran
+[K][4-5]: Congo -> Japan, Philippines, 0, 0
+Q4 && [O-Q][5]: Vietnam -> Germany, Ethiopia, 0, 0
+[B-D][5]: Iran -> 0, Egypt, Turkey, 0
+[E-G][5]: Turkey -> Iran, Mexico, 0, 0
+[M-N][5]: Germany -> 0, Ethiopia, 0, 0
+[H][6-8] && G8: Thailand -> 0, 0, France, South Africa
+[I][6-8] && J8: France -> Thailand, 0, Faiyaz’s land, South Africa
+[A-B][8]: United Kingdom -> 0, 0, 0, Burma
+E8 && [E-F][9]: Italy -> 0, 0, 0, Spain
+[K-O][8]: Faiyaz’s Land -> France, 0, Tanzania, Kenya and Tanzania
+P8 && [N-P][9] : Tanzania -> Faiyaz’s Land and Kenya, 0, 0, David’s land
+A10 && A11 && B9 && B10: Burma -> 0, United Kingdom, South Korea, Colombia
+[H-I][9] && [I-J]10: South Africa ->  0, Thailand and France, 0, Argentina
+[K-M][9] && [L-M]10: Kenya -> 0, Faiyaz’s Land, Tanzania and David’s Land, Ukraine
+D9 && [C-D]10 && [C-D]11: South Korea -> Burma and Colombia, 0, Sudan, 0
+[F-G]10 && [G-H]11: Spain -> 0, Italy, 0, Argentina
+N10 && N11 && N12 && O12: David’s Land -> Kenya and Ukraine, Tanzania, New Zealand, 0
+B11 && [A-B]12: Colombia -> Burma, Burma, South Korea, 0
+E11 && [E-F]12: Sudan -> South Korea, 0, 0, 0
+J11 && [H-K]12: Argentina-> 0, Spain and South Africa, Ukraine, 0
+[L-M]11 && [L-M]12: Ukraine -> Argentina, Kenya, David’s Land, 0
+[O-P]11: New Zealand -> David’s Land, 0, 0, David’s Land
