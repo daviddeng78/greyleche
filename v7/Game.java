@@ -93,9 +93,11 @@ public class Game extends Helpers {
         }
         while (!gameOver) {
             p1.place(p2);
-            p1.attack(p2);
+            /*p1.attack(p2);*/
+            p1.fortify(p2);
             p2.place(p1);
-            p2.attack(p1);
+            /*p2.attack(p1);*/
+            p2.fortify(p1);
         }
     }
 

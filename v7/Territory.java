@@ -127,7 +127,7 @@ public class Territory extends Helpers {
                 int startLetter = convertLetterToNum(regex.charAt(1));
                 int endLetter = convertLetterToNum(regex.charAt(3));
                 for (int column = startLetter; column <= endLetter; column++) {
-                    if (addOrSubtract == true) {
+                    if (Boolean.compare(addOrSubtract, true) == 0) {
                         Map.getTroops()[Integer.parseInt(regex.substring(5))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(5))][column]) + troops);
                     }
                     else {
@@ -142,7 +142,7 @@ public class Territory extends Helpers {
                 int endLetter = convertLetterToNum(regex.charAt(3));
                 for (int row = Integer.parseInt(regex.substring(6, 7)); row <= Integer.parseInt(regex.substring(8, 9)); row++) {
                     for (int column = startLetter; column <= endLetter; column++) {
-                        if (addOrSubtract == true) {
+                        if (Boolean.compare(addOrSubtract, true) == 0) {
                             Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
                         }
                         else {
@@ -157,7 +157,7 @@ public class Territory extends Helpers {
                 int start = convertLetterToNum(regex.charAt(1));
                 int end = convertLetterToNum(regex.charAt(3));
                 for (int column = start; column <= end; column++) {
-                    if (addOrSubtract == true) {
+                    if (Boolean.compare(addOrSubtract, true) == 0) {
                         Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(regex.lastIndexOf("]") - 1, regex.lastIndexOf("]")))][column]) + troops);
                     }
                     else {
@@ -170,7 +170,7 @@ public class Territory extends Helpers {
             else if (regex.matches(".*[0-9]-[0-9].*")) {
                 int column = convertLetterToNum(regex.charAt(1));
                 for (int row = Integer.parseInt(regex.substring(4, 5)); row <= Integer.parseInt(regex.substring(6, 7)); row++) {
-                    if (addOrSubtract == false) {
+                    if (Boolean.compare(addOrSubtract, true) == 0) {
                         Map.getTroops()[row][column] = String.valueOf(Integer.parseInt(Map.getTroops()[row][column]) + troops);
                     }
                     else {
@@ -182,7 +182,7 @@ public class Territory extends Helpers {
             //for addresses already in coordinate form (<Letter><Number>)
             else {
                 int column = convertLetterToNum(regex.charAt(0));
-                if (addOrSubtract == true) {
+                if (Boolean.compare(addOrSubtract, true) == 0) {
                     Map.getTroops()[Integer.parseInt(regex.substring(1))][column] = String.valueOf(Integer.parseInt(Map.getTroops()[Integer.parseInt(regex.substring(1))][column]) + troops);
                 }
                 else {

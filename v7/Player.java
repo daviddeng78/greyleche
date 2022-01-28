@@ -81,7 +81,6 @@ public class Player extends Helpers{
                         System.out.println("Placing 1 troop on " + territoryName);
                         Territory.changeColor(territoryName, this.getColor());
                         Territory.changeTroops(territoryName, 1, true);
-                        Map.setTroop(territoryName, Map.getTroopCount(territoryName)+1);
                         this.reinforcements -= 1;
                         this.territoriesOwned.add(territoryName);
                         this.numberTerritories += 1;
@@ -134,7 +133,6 @@ public class Player extends Helpers{
                             System.out.printf("Placing %d on %s\n", troops, territoryName);
                             Territory.changeColor(territoryName, this.getColor());
                             Territory.changeTroops(territoryName, troops, true);
-                            Map.setTroop(territoryName, Map.getTroopCount(territoryName) + troops);
                             this.reinforcements -= troops;
                             System.out.printf("You now have %s reinforcements left", this.reinforcements);
                             try {
@@ -190,15 +188,12 @@ public class Player extends Helpers{
 
             if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
                 System.out.println("You can't place troops on water.");
-                    try {
-                        Thread.sleep(1000);
-                    }
-                    catch (InterruptedException e) {
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
 
-                    }
-                    System.out.println(CLEAR);
-                    System.out.println(Map.arrToString(Map.getMap()));
-                    place(otherPlayer);
+                }
             }
 
             else if (Arrays.asList(this.territoriesOwned.toArray()).contains(territory)) {
@@ -210,6 +205,15 @@ public class Player extends Helpers{
                     Territory.changeTroops(territory, troops, true);
                     this.reinforcements -= troops;
                     System.out.printf("You now have %s reinforcements left", this.reinforcements);
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+
+                    }
+                }
+                else {
+                    System.out.printf("You only have %s available reinforcements\n", this.reinforcements);
                     try {
                         Thread.sleep(1000);
                     }
@@ -348,18 +352,29 @@ public class Player extends Helpers{
     }
 
     public void fortify(Player otherPlayer) {
-        System.out.println("Please enter the coordinates of the territory from where you wish to take troops from.");
+        System.out.println(this.color + this.name + RESET + ", please enter the coordinates of the territory from where you wish to take troops from.");
         String territoryAddress = sc.next();
         String territoryName = Territory.getTerritoryName(territoryAddress);
-        if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
+        if (territoryAddress.equals("skip")) {
+            return;
+        }
+
+        else if (Arrays.asList(Map.getWater()).contains(territoryAddress)) {
             System.out.println("You can't place troops on water");
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e) {
+
+            }
+            this.fortify(otherPlayer);
         }
 
         else if (Arrays.asList(this.territoriesOwned.toArray()).contains(territoryName)) {
             System.out.println(territoryName + " selected.");
             System.out.println("Please enter the number of troops you wish to take.");
             int troops = sc.nextInt();
-            if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops >= 3) {
+            if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(1, 2))][convertLetterToNum(territoryAddress.charAt(0))]) - troops >= 3) {
                 System.out.println(troops + " troops set for moving");
                 System.out.println("Please enter the coordinates of the territory which you wish to fortify");
                 String targetTerritoryAddress = sc.next();
@@ -372,7 +387,7 @@ public class Player extends Helpers{
                     catch (InterruptedException e) {
 
                     }
-                    fortify(otherPlayer);
+                    this.fortify(otherPlayer);
                 }
                 else if (targetTerritoryName.equals(territoryName)) {
                     System.out.println("You cannot fortify the same territory you wish to take troops from!");
@@ -382,7 +397,7 @@ public class Player extends Helpers{
                     catch (InterruptedException e) {
                         
                     }
-                    fortify(otherPlayer);
+                    this.fortify(otherPlayer);
                 }
                 else if (!(Arrays.asList(this.territoriesOwned.toArray()).contains(targetTerritoryName))) {
                     System.out.println("You cannot fortify a territory that is not your own.");
@@ -392,23 +407,39 @@ public class Player extends Helpers{
                     catch (InterruptedException e) {
 
                     }
-                    fortify(otherPlayer);
+                    this.fortify(otherPlayer);
                 }
-                else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops <= 3 && Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops > 0) {
-                    System.out.println("You need to leave at least three troops behind on the territory.");
+                else {
+                    System.out.printf("Moving %1d troops from %2s to %3s\n", troops, territoryName, targetTerritoryName);
                     try {
                         Thread.sleep(1000);
                     }
                     catch (InterruptedException e) {
 
                     }
-                    fortify(otherPlayer);
-                }
-                else {
-                    System.out.printf("Moving 6 troops from %1s to %2s\n", troops, territoryName, targetTerritoryName);
                     Territory.changeTroops(territoryName, troops, false);
                     Territory.changeTroops(targetTerritoryName, troops, true);
                 }
+            }
+            else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(1, 2))][convertLetterToNum(territoryAddress.charAt(0))]) - troops <= 3 && Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(1, 2))][convertLetterToNum(territoryAddress.charAt(0))]) - troops > 0) {
+                System.out.println("You need to leave at least three troops behind on the territory.");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+
+                }
+                this.fortify(otherPlayer);
+            }
+            else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(1, 2))][convertLetterToNum(territoryAddress.charAt(0))]) - troops < 0) {
+                System.out.println("You do not have this many troops in that territory...");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+
+                }
+                this.fortify(otherPlayer);
             }
         }
         else {
@@ -419,7 +450,9 @@ public class Player extends Helpers{
             catch (InterruptedException e) {
 
             }
-            fortify(otherPlayer);
+            this.fortify(otherPlayer);
         }
+        System.out.println(CLEAR);
+        System.out.println(Map.arrToString(Map.getMap()));
     }
 }
