@@ -303,8 +303,16 @@ public class Player extends Helpers{
                             if (targetTerritoryRegex.contains("[")) {
                                 targetTerritoryCoord = targetTerritoryRegex.substring(1, 2) + targetTerritoryRegex.substring(targetTerritoryRegex.lastIndexOf("]") - 1, targetTerritoryRegex.lastIndexOf("]"));
                             }
-                            //separate coordinate to find number of troops on mapTroop
-                            //use conditions to decide whether attack is successful or not  
+                            int attackingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1, 2))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]);
+                            int defendingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(targetTerritoryCoord.substring(1, 2))][convertLetterToNum(targetTerritoryCoord.charAt(0))]);
+                            //use conditions to decide whether attack is successful or not
+                            if (attackingTroops - defendingTroops >= 10) {
+                                otherPlayer.territoriesOwned.remove(targetTerritoryName);
+                                this.territoriesOwned.add(targetTerritoryName);
+                                System.out.println("Attack was successful! You have taken over " + targetTerritoryName + "!\nThe enemy saw that they were outnumbered and many surrendered.\nStill ended up dead though, must have been the water...");
+                                
+                                Territory.changeColor(targetTerritoryName, this.color);
+                            }
                         }
                     }
                 }
