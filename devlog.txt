@@ -90,3 +90,6 @@ May:: Completed attack and incorporated it into the game along with small map er
 
 2022-01-27
 David:: Refactored changeTroops method to allow for subtracting of troops as well. Finished with fortify method. Refactored placement method to solve new bugs that arose during testing.
+
+2022-01-28
+David:: Created new helper method that would help with finding adjacent territories during attack phase.

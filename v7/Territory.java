@@ -51,6 +51,17 @@ public class Territory extends Helpers {
         return possibleCoords;
     }
 
+    public static String getTerritoryAdjacencies(String territoryName) {
+        String allAdjacentCountries = "";
+        for (int i = 0; i < Map.getTerritory().length; i++) {
+            if (territoryName.equals(Map.getTerritory()[i])) {
+                allAdjacentCountries = Map.getAddresses()[i];
+                break;
+            }
+        }
+        return allAdjacentCountries;
+    }
+
     public static void changeColor(String territoryName, String color) {
         String territoryCoords = getTerritoryCoords(territoryName);
         ArrayList<String> regexes = new ArrayList<String>();

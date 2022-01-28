@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Game extends Helpers {
 
-    private boolean gameOver;
+    private static boolean gameOver;
     Scanner sc;
 
     public Game() {
@@ -11,6 +11,14 @@ public class Game extends Helpers {
         sc = new Scanner(System.in);
         gameOver = false;
         start(p1, p2);
+    }
+
+    public static void endGame() {
+        gameOver = true;
+    }
+
+    public static boolean getGameStatus() {
+        return gameOver;
     }
 
     public void start(Player p1, Player p2) {
@@ -93,10 +101,10 @@ public class Game extends Helpers {
         }
         while (!gameOver) {
             p1.place(p2);
-            /*p1.attack(p2);*/
+            p1.attack(p2);
             p1.fortify(p2);
             p2.place(p1);
-            /*p2.attack(p1);*/
+            p2.attack(p1);
             p2.fortify(p1);
         }
     }

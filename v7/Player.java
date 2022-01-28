@@ -9,6 +9,7 @@ public class Player extends Helpers{
     private int numberTerritories;
     private boolean resigned;
     private int reinforcements;
+    private boolean endAttack;
     Scanner sc;
 
     public Player() {
@@ -42,6 +43,10 @@ public class Player extends Helpers{
 
     public int getNumberReinforcements() {
         return reinforcements;
+    }
+
+    public boolean getAttackStatus() {
+        return endAttack;
     }
 
     public void resign() {
@@ -133,8 +138,6 @@ public class Player extends Helpers{
                             System.out.printf("Placing %d on %s\n", troops, territoryName);
                             Territory.changeColor(territoryName, this.getColor());
                             Territory.changeTroops(territoryName, troops, true);
-                            Map.setTroop(territoryName, Map.getTroopCount(territoryName)+ troops);
-                            Map.setTroop(territoryName, Map.getTroopCount(territoryName) + troops);
                             this.reinforcements -= troops;
                             System.out.printf("You now have %s reinforcements left", this.reinforcements);
                             try {
@@ -181,6 +184,10 @@ public class Player extends Helpers{
 
 
     public void place(Player otherPlayer) {
+        if (Boolean.compare(Game.getGameStatus(), true) == 0) {
+            return;
+        }
+        System.out.println(this.color + "Starting placement period..." + RESET);
         this.reinforcements = this.numberTerritories / 3;
         System.out.printf(getColor() + getName() + RESET + " gained %d troops this round. Entering placement period...\n\n", reinforcements);
         while (this.reinforcements != 0) {
@@ -205,7 +212,6 @@ public class Player extends Helpers{
                 if (troops <= this.reinforcements) {
                     Territory.changeColor(territory, this.getColor());
                     Territory.changeTroops(territory, troops, true);
-                    Map.setTroop(territory, Map.getTroopCount(territory)+troops);
                     this.reinforcements -= troops;
                     System.out.printf("You now have %s reinforcements left", this.reinforcements);
                     try {
@@ -239,146 +245,54 @@ public class Player extends Helpers{
         }
     }
 
-    public boolean isOwned(String territory){
-        for(int i=0; i<territoriesOwned.size();i++){
-            if(territory.equals(territoriesOwned.get(i))){
-                return true;
+    public void attack(Player otherPlayer) {
+        if (Boolean.compare(Game.getGameStatus(), true) == 0) {
+            return;
+        }
+        endAttack = false;
+        System.out.println(this.color + "Starting attack period..." + RESET);
+        while (!endAttack) {
+            System.out.println(this.color + this.name + RESET + ", enter the coordinates of the territory you would like to initiate the attack from. Type 'resign' if you wish to resign or 'skip' if you wish to skip this phase.");
+            String attackingTerritoryAddress = sc.next().trim();
+            if (attackingTerritoryAddress.equals("resign")) {
+                Game.endGame();
+                return;
             }
-        }
-        return false;
-    }
-
-    public String help1(ArrayList<String> offense) {
-        boolean correct = false;
-        System.out.println("Here are your terrorrities you can attack from:" + offense);
-        System.out.println("Pick a terrority to attack from!");
-        String te = sc.nextLine();
-        if(te.equals("skip")){
-          return te;
-        }
-        for(int x = 0; x < offense.size(); x++) {
-            if(te.equals(offense.get(x))) {
-                correct = true;
+            else if (attackingTerritoryAddress.equals("skip")) {
+                endAttack = true;
             }
-        }
-        if(!correct) {
-            System.out.print("Not a terrorrity you can attack from!");
-            return help1(offense);
-        }
-        else {
-            return te;
-        }
-    }
-
-    public int help2(int max){
-      Scanner troopsDispatched = new Scanner(System.in);
-      System.out.println("Attack Successful!");
-      System.out.println("How many troops do you wish to dispatch into your new territory? \nMax you may dispatch is:" + max);
-      if(!(troopsDispatched.hasNextInt())){
-        System.out.println("not a valid number");
-        help2(max);
-      }
-      int troopInNewLand = troopsDispatched.nextInt();
-        if(troopInNewLand > max || troopInNewLand <= 0 ){
-        System.out.println("The troop number you inputted is not valid");
-        help2(max);
-      }
-        else{
-        return troopInNewLand;
-      }
-      return 0;
-    }
-
-      public void attack(Player other) {
-          ArrayList<String> terror = convert(Map.getTerritory());
-          ArrayList<ArrayList<String>> adj = Map.andRemover();
-          ArrayList<String> offense = new ArrayList<String>();
-          boolean end = false;
-          Scanner sc = new Scanner(System.in);
-          while(end == false){
-          System.out.println(this.getColor() + this.getName() + RESET + " Please enter the coordinates of the territory you wish to attack! Type skip if you do not wish to attack");
-          String cord = sc.nextLine();
-          String target = Territory.getTerritoryName(cord);
-          if(cord.equals("skip")){
-            System.out.println("Turned skipped!");
-          }
-
-          else{
-            if(isOwned(target)) {
-              System.out.println("You cannot attack your own land. Please reenter a coordinate to attack");
-              this.attack(other);
-          }
             else {
-              int ind = terror.indexOf(target);
-              if(ind < 0){
-                System.out.println("Not a valid territory.");
-                this.attack(other);
-              }
-              for(int i = 0; i < (adj.get(ind)).size(); i++) {
-                  if ((this.isOwned((adj.get(ind)).get(i))) && ((Map.getTroopCount((adj.get(ind)).get(i))) > Map.getTroopCount(target))) {
-                      offense.add((adj.get(ind)).get(i));
-                  }
-              }
-            }
-              if (offense.size() == 0) {
-                  System.out.println("You do not have any terrorrity to attack from! Please reenter a cordinate to attack");
-                  this.attack(other);
-              }
+                String attackingTerritoryName = Territory.getTerritoryName(attackingTerritoryAddress);
+                if (Arrays.asList(Map.getWater()).contains(attackingTerritoryName)) {
+                    System.out.println("You do not have any troops on water and you never will.");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
 
-              else {
-                  String TE = help1(offense);
-                  if(TE.equals("skip")){
-                    System.out.println("Turned Skipped");
-                  }
-                  else{
-                    int attackers = Map.getTroopCount(TE);
-                    int defenders = Map.getTroopCount(target);
-                    if((attackers > defenders)|| (attackers == 1)){
-                      if(other.isOwned(target)){
-                        (other.territoriesOwned).remove(target);
-                      }
-                        (this.territoriesOwned).add(target);
-                        int troopLeft = attackers - 1;
-                        int troopact = help2(troopLeft);
-                        Map.setTroop(target, troopact);
-                        Map.setTroop(TE, (attackers - troopact));
-                        Territory.changeColor(target, this.getColor());
-                        Territory.changeTroops(target, defenders, false);
-                        Territory.changeTroops(target, troopact, true);
-                        Territory.changeTroops(TE, troopact, false);
-                      }
-                      else{
-                        System.out.println("MISSION FAIL, YOU'LL GET THEM NEXT TIME");
-                        Scanner button = new Scanner(System.in);
-                        System.out.println("Press enter to continue");
-                        String response = button.nextLine();
-                      }
-                  }
-                  }
-                  }
-                  System.out.println(CLEAR);
-                  System.out.println(Map.arrToString(Map.getMap()));
-                  System.out.println("Do you want to end turn?: Type no if you do not want to end turn, type anything else to end turn.");
-                  String a = sc.nextLine();
-                  if((a.equals("no"))||(a.equals("No"))){
-                  }
-                  else{
-                    end = true;
-                    break;
-                  }
+                    }
                 }
-                  return;
-              }
+                else if (Arrays.asList(this.territoriesOwned.toArray()).contains(attackingTerritoryName)) {
+                    System.out.println("You are attacking from " + attackingTerritoryName);
+                }
+                else {
+                    System.out.println("You do not own this territory!");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
 
-    public static ArrayList<String> convert(String[] x){
-        ArrayList<String> ans = new ArrayList<String>();
-        for(int i = 0; i < x.length; i++){
-            ans.add(x[i]);
+                    }
+                }
+            }
         }
-        return ans;
     }
 
     public void fortify(Player otherPlayer) {
+        if (Boolean.compare(Game.getGameStatus(), true) == 0) {
+            return;
+        }
+        System.out.println(this.color + "Starting fortification period..." + RESET);
         System.out.println(this.color + this.name + RESET + ", please enter the coordinates of the territory from where you wish to take troops from.");
         String territoryAddress = sc.next();
         String territoryName = Territory.getTerritoryName(territoryAddress);
