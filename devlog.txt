@@ -89,4 +89,4 @@ David:: Refactored initPlacement method to send correct message. Minor formatiin
 May:: Completed attack and incorporated it into the game along with small map errors.
 
 2022-01-27
-David:: Refactored changeTroops method to allow for subtracting of troops as well. Almost finished with fortify method.
+David:: Refactored changeTroops method to allow for subtracting of troops as well. Finished(?) with fortify method.

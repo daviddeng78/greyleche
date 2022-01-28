@@ -356,12 +356,25 @@ public class Player extends Helpers{
         }
 
         else if (Arrays.asList(this.territoriesOwned.toArray()).contains(territoryName)) {
+            System.out.println(territoryName + " selected.");
             System.out.println("Please enter the number of troops you wish to take.");
             int troops = sc.nextInt();
             if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops >= 3) {
+                System.out.println(troops + " troops set for moving");
                 System.out.println("Please enter the coordinates of the territory which you wish to fortify");
-                String targetTerritoryName = Territory.getTerritoryName(sc.next());
-                if (targetTerritoryName.equals(territoryName)) {
+                String targetTerritoryAddress = sc.next();
+                String targetTerritoryName = Territory.getTerritoryName(targetTerritoryAddress);
+                if (Arrays.asList(Map.getWater()).contains(targetTerritoryAddress)) {
+                    System.out.println("You really shouldn't send your troops to drown...");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+
+                    }
+                    fortify(otherPlayer);
+                }
+                else if (targetTerritoryName.equals(territoryName)) {
                     System.out.println("You cannot fortify the same territory you wish to take troops from!");
                     try {
                         Thread.sleep(1000);
@@ -381,9 +394,22 @@ public class Player extends Helpers{
                     }
                     fortify(otherPlayer);
                 }
-                else {
-                    
+                else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops <= 3 && Integer.parseInt(Map.getTroops()[Integer.parseInt(territoryAddress.substring(0, 1))][convertLetterToNum(territoryAddress.charAt(1))]) - troops > 0) {
+                    System.out.println("You need to leave at least three troops behind on the territory.");
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+
+                    }
+                    fortify(otherPlayer);
                 }
+                else {
+                    System.out.printf("Moving 6 troops from %1s to %2s\n", troops, territoryName, targetTerritoryName);
+                    Territory.changeTroops(territoryName, troops, false);
+                    Territory.changeTroops(targetTerritoryName, troops, true);
+                }
+            }
         }
         else {
             System.out.println("You cannot fortify a territory that is not your own.");
