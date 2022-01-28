@@ -274,6 +274,39 @@ public class Player extends Helpers{
                 }
                 else if (Arrays.asList(this.territoriesOwned.toArray()).contains(attackingTerritoryName)) {
                     System.out.println("You are attacking from " + attackingTerritoryName);
+                    String[] adjacencyNames = Territory.getTerritoryAdjacencies(attackingTerritoryName).split(", ");
+                    ArrayList<String> possibleAttackDestinations = new ArrayList<String>();
+                    for (String name : adjacencyNames) {
+                        if (otherPlayer.territoriesOwned.contains(name)) {
+                            possibleAttackDestinations.add(name);
+                        }
+                    }
+                    int noOfOptions = possibleAttackDestinations.size();
+                    if (noOfOptions == 0) {
+                        System.out.println("There are no enemy territories adjacent to this one that you can attack");
+                    }
+                    else {
+                        System.out.println("Enter in the number in the option list of the territory you wish to attack");
+                        System.out.println("Your options are: " + possibleAttackDestinations.toString());
+                        int option = sc.nextInt();
+                        if (option > noOfOptions) {
+                            System.out.println("Not a valid number");
+                        }
+                        else {
+                            String targetTerritoryName = possibleAttackDestinations.get(option - 1);
+                            String targetTerritoryRegexes = Territory.getTerritoryCoords(targetTerritoryName);
+                            String targetTerritoryRegex = targetTerritoryRegexes;
+                            if (targetTerritoryRegexes.contains("&&")) {
+                                targetTerritoryRegex = targetTerritoryRegexes.substring(0, targetTerritoryRegexes.indexOf("&&") - 1);
+                            }
+                            String targetTerritoryCoord = targetTerritoryRegex;
+                            if (targetTerritoryRegex.contains("[")) {
+                                targetTerritoryCoord = targetTerritoryRegex.substring(1, 2) + targetTerritoryRegex.substring(targetTerritoryRegex.lastIndexOf("]") - 1, targetTerritoryRegex.lastIndexOf("]"));
+                            }
+                            //separate coordinate to find number of troops on mapTroop
+                            //use conditions to decide whether attack is successful or not  
+                        }
+                    }
                 }
                 else {
                     System.out.println("You do not own this territory!");
