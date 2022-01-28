@@ -133,6 +133,8 @@ public class Player extends Helpers{
                             System.out.printf("Placing %d on %s\n", troops, territoryName);
                             Territory.changeColor(territoryName, this.getColor());
                             Territory.changeTroops(territoryName, troops, true);
+                            Map.setTroop(territoryName, Map.getTroopCount(territoryName)+ troops);
+                            Map.setTroop(territoryName, Map.getTroopCount(territoryName) + troops);
                             this.reinforcements -= troops;
                             System.out.printf("You now have %s reinforcements left", this.reinforcements);
                             try {
@@ -203,6 +205,7 @@ public class Player extends Helpers{
                 if (troops <= this.reinforcements) {
                     Territory.changeColor(territory, this.getColor());
                     Territory.changeTroops(territory, troops, true);
+                    Map.setTroop(territory, Map.getTroopCount(territory)+troops);
                     this.reinforcements -= troops;
                     System.out.printf("You now have %s reinforcements left", this.reinforcements);
                     try {
@@ -247,7 +250,7 @@ public class Player extends Helpers{
 
     public String help1(ArrayList<String> offense) {
         boolean correct = false;
-        System.out.println("here are your terrorrities you can attack from:" + offense);
+        System.out.println("Here are your terrorrities you can attack from:" + offense);
         System.out.println("Pick a terrority to attack from!");
         String te = sc.nextLine();
         if(te.equals("skip")){
@@ -269,9 +272,14 @@ public class Player extends Helpers{
 
     public int help2(int max){
       Scanner troopsDispatched = new Scanner(System.in);
+      System.out.println("Attack Successful!");
       System.out.println("How many troops do you wish to dispatch into your new territory? \nMax you may dispatch is:" + max);
+      if(!(troopsDispatched.hasNextInt())){
+        System.out.println("not a valid number");
+        help2(max);
+      }
       int troopInNewLand = troopsDispatched.nextInt();
-        if(troopInNewLand > max || troopInNewLand > 0 ){
+        if(troopInNewLand > max || troopInNewLand <= 0 ){
         System.out.println("The troop number you inputted is not valid");
         help2(max);
       }
@@ -285,8 +293,10 @@ public class Player extends Helpers{
           ArrayList<String> terror = convert(Map.getTerritory());
           ArrayList<ArrayList<String>> adj = Map.andRemover();
           ArrayList<String> offense = new ArrayList<String>();
+          boolean end = false;
           Scanner sc = new Scanner(System.in);
-          System.out.println(this.getColor() + this.getName() + RESET + "Please enter the coordinates of the territory you wish to attack! Type skip if you do not wish to attack");
+          while(end == false){
+          System.out.println(this.getColor() + this.getName() + RESET + " Please enter the coordinates of the territory you wish to attack! Type skip if you do not wish to attack");
           String cord = sc.nextLine();
           String target = Territory.getTerritoryName(cord);
           if(cord.equals("skip")){
@@ -305,7 +315,7 @@ public class Player extends Helpers{
                 this.attack(other);
               }
               for(int i = 0; i < (adj.get(ind)).size(); i++) {
-                  if (this.isOwned((adj.get(ind)).get(i))) {
+                  if ((this.isOwned((adj.get(ind)).get(i))) && ((Map.getTroopCount((adj.get(ind)).get(i))) > Map.getTroopCount(target))) {
                       offense.add((adj.get(ind)).get(i));
                   }
               }
@@ -323,23 +333,40 @@ public class Player extends Helpers{
                   else{
                     int attackers = Map.getTroopCount(TE);
                     int defenders = Map.getTroopCount(target);
-                    if(attackers > defenders){
+                    if((attackers > defenders)|| (attackers == 1)){
                       if(other.isOwned(target)){
                         (other.territoriesOwned).remove(target);
                       }
                         (this.territoriesOwned).add(target);
-                        int troopLeft = attackers - defenders - 1;
-                        Map.setTroop(TE, 1);
+                        int troopLeft = attackers - 1;
                         int troopact = help2(troopLeft);
                         Map.setTroop(target, troopact);
-                        Map.setTroop(TE, (troopLeft - troopact));
+                        Map.setTroop(TE, (attackers - troopact));
+                        Territory.changeColor(target, this.getColor());
+                        Territory.changeTroops(target, defenders, false);
+                        Territory.changeTroops(target, troopact, true);
+                        Territory.changeTroops(TE, troopact, false);
                       }
                       else{
                         System.out.println("MISSION FAIL, YOU'LL GET THEM NEXT TIME");
+                        Scanner button = new Scanner(System.in);
+                        System.out.println("Press enter to continue");
+                        String response = button.nextLine();
                       }
                   }
                   }
                   }
+                  System.out.println(CLEAR);
+                  System.out.println(Map.arrToString(Map.getMap()));
+                  System.out.println("Do you want to end turn?: Type no if you do not want to end turn, type anything else to end turn.");
+                  String a = sc.nextLine();
+                  if((a.equals("no"))||(a.equals("No"))){
+                  }
+                  else{
+                    end = true;
+                    break;
+                  }
+                }
                   return;
               }
 
@@ -395,7 +422,7 @@ public class Player extends Helpers{
                         Thread.sleep(1000);
                     }
                     catch (InterruptedException e) {
-                        
+
                     }
                     this.fortify(otherPlayer);
                 }

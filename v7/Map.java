@@ -101,6 +101,10 @@ public class Map extends Helpers {
         return adjacencies;
     }
 
+    public static int[] troopNumber(){
+      return troops;
+    }
+
     public static String arrToString(String[][] map) {
         String result = "";
         for (int row = 0; row < map.length; row++) {

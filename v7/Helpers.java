@@ -32,6 +32,14 @@ public class Helpers {
         System.out.println(result + array[array.length - 1]);
     }
 
+    public static void toString(int[] array) {
+        String result = "";
+        for (int i = 0; i < array.length - 1; i++) {
+            result += array[i] + ", ";
+        }
+        System.out.println(result + array[array.length - 1]);
+    }
+
     public static int convertLetterToNum(char c) {
         return c - 64;
     }
