@@ -55,7 +55,7 @@ public class Territory extends Helpers {
         String allAdjacentCountries = "";
         for (int i = 0; i < Map.getTerritory().length; i++) {
             if (territoryName.equals(Map.getTerritory()[i])) {
-                allAdjacentCountries = Map.getAddresses()[i];
+                allAdjacentCountries = Map.getAdjacencies()[i];
                 break;
             }
         }
