@@ -252,6 +252,11 @@ public class Player extends Helpers{
         this.endAttack = false;
         System.out.println(this.color + "Starting attack period..." + RESET);
         while (!endAttack) {
+            if (this.numberTerritories == 37) {
+                otherPlayer.resign();
+                Game.endGame();
+                break;
+            }
             System.out.println(this.color + this.name + RESET + ", enter the coordinates of the territory you would like to initiate the attack from. Type 'resign' if you wish to resign or 'skip' if you wish to skip this phase or end this attack turn.");
             String attackingTerritoryAddress = sc.next().trim();
             if (attackingTerritoryAddress.equals("resign")) {
@@ -339,6 +344,7 @@ public class Player extends Helpers{
                                     }
                                     otherPlayer.territoriesOwned.remove(targetTerritoryName);
                                     this.territoriesOwned.add(targetTerritoryName);
+                                    this.numberTerritories += 1;
                                     Territory.changeTroops(attackingTerritoryName, defendingTroops + troops, false);
                                     Territory.changeColor(targetTerritoryName, this.color);
                                     Territory.changeTroops(targetTerritoryName, troops - defendingTroops, true);
@@ -385,6 +391,9 @@ public class Player extends Helpers{
                                         catch (InterruptedException e) {
 
                                         }
+                                        otherPlayer.territoriesOwned.remove(targetTerritoryName);
+                                        this.territoriesOwned.add(targetTerritoryName);
+                                        this.numberTerritories += 1;
                                         Territory.changeTroops(attackingTerritoryName, defendingTroops - 2, false);
                                         Territory.changeTroops(attackingTerritoryName, troops, false);
                                         Territory.changeColor(targetTerritoryName, this.color);
