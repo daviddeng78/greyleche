@@ -106,6 +106,12 @@ public class Game extends Helpers {
             p2.place(p1);
             p2.attack(p1);
             p2.fortify(p1);
+            if (p1.resigned() == true) {
+                System.out.println(p1.getColor() + p1.getName() + RESET + " won!");
+            }
+            else if (p2.resigned() == true) {
+                System.out.println(p2.getColor() + p2.getName() + RESET + " won!");
+            }
         }
     }
 
@@ -252,5 +258,9 @@ public class Game extends Helpers {
             default:
                 credits(p1, p2);
         }
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game();
     }
 }

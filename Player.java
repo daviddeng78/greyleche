@@ -135,7 +135,7 @@ public class Player extends Helpers{
                         System.out.printf("How many troops would you like to add to %s? ", territoryName);
                         int troops = sc.nextInt();
                         if (troops <= reinforcements) {
-                            System.out.printf("Placing %d on %s\n", troops, territoryName);
+                            System.out.printf("Placing %d troops on %s\n", troops, territoryName);
                             Territory.changeColor(territoryName, this.getColor());
                             Territory.changeTroops(territoryName, troops, true);
                             this.reinforcements -= troops;
@@ -249,9 +249,14 @@ public class Player extends Helpers{
         if (Boolean.compare(Game.getGameStatus(), true) == 0) {
             return;
         }
-        endAttack = false;
+        this.endAttack = false;
         System.out.println(this.color + "Starting attack period..." + RESET);
         while (!endAttack) {
+            if (this.numberTerritories == 37) {
+                otherPlayer.resign();
+                Game.endGame();
+                break;
+            }
             System.out.println(this.color + this.name + RESET + ", enter the coordinates of the territory you would like to initiate the attack from. Type 'resign' if you wish to resign or 'skip' if you wish to skip this phase or end this attack turn.");
             String attackingTerritoryAddress = sc.next().trim();
             if (attackingTerritoryAddress.equals("resign")) {
@@ -261,19 +266,19 @@ public class Player extends Helpers{
             else if (attackingTerritoryAddress.equals("skip")) {
                 endAttack = true;
             }
+            else if (Arrays.asList(Map.getWater()).contains(attackingTerritoryAddress)) {
+                System.out.println("You do not have any troops on water and you never will.");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+
+                }
+            }
             else {
                 String attackingTerritoryName = Territory.getTerritoryName(attackingTerritoryAddress);
-                if (Arrays.asList(Map.getWater()).contains(attackingTerritoryName)) {
-                    System.out.println("You do not have any troops on water and you never will.");
-                    try {
-                        Thread.sleep(1000);
-                    }
-                    catch (InterruptedException e) {
-
-                    }
-                }
-                else if (Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]) == 1) {
-                    System.out.println("You're taking the term one-man army too seriously");
+                if (Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]) == 1) {
+                    System.out.println("You're taking the term one-man army way too seriously");
                     try {
                         Thread.sleep(1000);
                     }
@@ -286,7 +291,7 @@ public class Player extends Helpers{
                     String[] adjacencyNames = Territory.getTerritoryAdjacencies(attackingTerritoryName).split(", ");
                     ArrayList<String> possibleAttackDestinations = new ArrayList<String>();
                     for (String name : adjacencyNames) {
-                        if (otherPlayer.territoriesOwned.contains(name) && !Arrays.asList(possibleAttackDestinations.toArray()).contains(attackingTerritoryName)) {
+                        if (otherPlayer.territoriesOwned.contains(name)) {
                             possibleAttackDestinations.add(name);
                         }
                     }
@@ -313,25 +318,23 @@ public class Player extends Helpers{
                             String targetTerritoryRegex = targetTerritoryRegexes;
                             if (targetTerritoryRegexes.contains("&&")) {
                                 targetTerritoryRegex = targetTerritoryRegexes.substring(0, targetTerritoryRegexes.indexOf("&&") - 1);
+                                System.out.println("targetTerritoryRegex: " + targetTerritoryRegex);
                             }
                             String targetTerritoryCoord = targetTerritoryRegex;
                             if (targetTerritoryRegex.contains("[")) {
                                 targetTerritoryCoord = targetTerritoryRegex.substring(1, 2) + targetTerritoryRegex.substring(targetTerritoryRegex.lastIndexOf("]") - 1, targetTerritoryRegex.lastIndexOf("]"));
+                                System.out.println("targetTerritoryCoord: " + targetTerritoryCoord);
                             }
-                            int attackingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1, 2))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]);
-                            int defendingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(targetTerritoryCoord.substring(1, 2))][convertLetterToNum(targetTerritoryCoord.charAt(0))]);
-                            //use conditions to decide whether attack is successful or not
-                            if (attackingTroops - defendingTroops >= 10) {
-                                otherPlayer.territoriesOwned.remove(targetTerritoryName);
-                                this.territoriesOwned.add(targetTerritoryName);
+                            int attackingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(attackingTerritoryAddress.substring(1))][convertLetterToNum(attackingTerritoryAddress.charAt(0))]);
+                            int defendingTroops = Integer.parseInt(Map.getTroops()[Integer.parseInt(targetTerritoryCoord.substring(1))][convertLetterToNum(targetTerritoryCoord.charAt(0))]);
+                            System.out.println("Attacking troops: " + attackingTroops);
+                            System.out.println("Defending troops: " + defendingTroops);
+                            if (attackingTroops - defendingTroops > 0) {
                                 System.out.println("Attack was successful! You have taken over " + targetTerritoryName + "!\nThe enemy saw that they were outnumbered and many surrendered.\nStill ended up dead though, must have been the water...\n");
-                                System.out.printf("You lost %1d troops though. You now have %2d troops.\n", defendingTroops - 1, attackingTroops - defendingTroops + 1);
+                                System.out.printf("You lost %1d troops though. You now have %2d troops.\n", defendingTroops, attackingTroops - defendingTroops);
                                 System.out.printf("How many troops would you like to put on %1s?\n", targetTerritoryName);
                                 int troops = sc.nextInt();
-                                if (troops > 0 && troops < attackingTroops - defendingTroops + 1) {
-                                    Territory.changeTroops(attackingTerritoryName, defendingTroops - 1 + troops, false);
-                                    Territory.changeColor(targetTerritoryName, this.color);
-                                    Territory.changeTroops(targetTerritoryName, -defendingTroops + troops, true);
+                                if (troops > 0 && troops <= attackingTroops - defendingTroops - 1) {
                                     System.out.println("Updating map...");
                                     try {
                                         Thread.sleep(1000);
@@ -339,14 +342,29 @@ public class Player extends Helpers{
                                     catch (InterruptedException e) {
 
                                     }
+                                    otherPlayer.territoriesOwned.remove(targetTerritoryName);
+                                    this.territoriesOwned.add(targetTerritoryName);
+                                    this.numberTerritories += 1;
+                                    Territory.changeTroops(attackingTerritoryName, defendingTroops + troops, false);
+                                    Territory.changeColor(targetTerritoryName, this.color);
+                                    Territory.changeTroops(targetTerritoryName, troops - defendingTroops, true);
                                 }
-                                else if (troops >= attackingTroops - defendingTroops + 1) {
-                                    System.out.println("I don't know where you're getting those extra people but I'm not counting them...");
+                                else if (troops == attackingTroops - defendingTroops - 1) {
+                                    System.out.println("You must leave at least 1 troop on your initial territory.");
                                     try {
                                         Thread.sleep(1000);
                                     }
                                     catch (InterruptedException e) {
-                                        
+                                    
+                                    }
+                                }
+                                else if (troops > attackingTroops - defendingTroops - 1) {
+                                    System.out.println("I'm not counting those imaginary troops you think you have");
+                                    try {
+                                        Thread.sleep(1000);
+                                    }
+                                    catch (InterruptedException e) {
+
                                     }
                                 }
                                 else {
@@ -359,28 +377,40 @@ public class Player extends Helpers{
                                     }
                                 }
                             }
-                            else if (attackingTroops - defendingTroops >= 0 && attackingTroops - defendingTroops < 10) {
-                                double chanceOfSuccess = 0.5 + 0.05 * (attackingTroops - defendingTroops);
-                                if (Math.random() <= chanceOfSuccess) {
-                                    System.out.println("Attack was successful! You have taken over " + targetTerritoryName + "!\nIt was a close one but your troops managed to pull through in the end.");
-                                    System.out.printf("You lost %1d troops though. You now have %2d troops\n", defendingTroops, attackingTroops - defendingTroops);
-                                    System.out.printf("How many troops would you like to put on %1s?\n", targetTerritoryName);
+                            else if (attackingTroops == defendingTroops) {
+                                if (Math.random() >= 0.5) {
+                                    System.out.println("Successful attack! Luck was on your side, this time at least...");
+                                    System.out.printf("You lost %1d troops. You now have %2d troops.\n", defendingTroops - 2, attackingTroops - defendingTroops + 2);
+                                    System.out.println("How many troops would you like to place on " + targetTerritoryName + "?");
                                     int troops = sc.nextInt();
-                                    if (troops > 0 && troops < attackingTroops - defendingTroops) {
-                                        Territory.changeTroops(attackingTerritoryName, defendingTroops + troops, false);
+                                    if (troops > 0 && troops < attackingTroops - defendingTroops + 2) {
+                                        System.out.println("Updating map...");
+                                        try {
+                                            Thread.sleep(1000);
+                                        }
+                                        catch (InterruptedException e) {
+
+                                        }
+                                        otherPlayer.territoriesOwned.remove(targetTerritoryName);
+                                        this.territoriesOwned.add(targetTerritoryName);
+                                        this.numberTerritories += 1;
+                                        Territory.changeTroops(attackingTerritoryName, defendingTroops - 2, false);
+                                        Territory.changeTroops(attackingTerritoryName, troops, false);
                                         Territory.changeColor(targetTerritoryName, this.color);
-                                        Territory.changeTroops(targetTerritoryName, -defendingTroops + troops, true);
+                                        Territory.changeTroops(targetTerritoryName, troops - defendingTroops, true);
                                     }
                                 }
                                 else {
-                                    System.out.println("Attack was unsuccessful! You failed to take over " + targetTerritoryName + "!\nThey were just better, I guess.");
-                                    Territory.changeTroops(attackingTerritoryName, 1, false);
+                                    System.out.println("Unsuccessful attack. They were just better, I guess");
+                                    System.out.printf("You lost %1d troops. You now have %2d troops.\n", defendingTroops / 2, attackingTroops - defendingTroops / 2);
+                                    System.out.println("Updating map...");
                                     try {
                                         Thread.sleep(1000);
                                     }
                                     catch (InterruptedException e) {
 
                                     }
+                                    Territory.changeTroops(attackingTerritoryName, defendingTroops / 2, false);
                                 }
                             }
                             else {

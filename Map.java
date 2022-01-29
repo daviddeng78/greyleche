@@ -55,7 +55,6 @@ public class Map extends Helpers {
     private static String[] territoryAddresses = new String[37];
     private static String[] territories = new String[37];
     private static String[] adjacencies = new String[37];
-    private static int[] troops = new int[37];
     public Map() {
 
     }
@@ -86,10 +85,6 @@ public class Map extends Helpers {
 
     public static String[] getAdjacencies() {
         return adjacencies;
-    }
-
-    public static int[] troopNumber(){
-      return troops;
     }
 
     public static String arrToString(String[][] map) {
