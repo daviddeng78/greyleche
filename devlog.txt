@@ -93,4 +93,4 @@ David:: Refactored changeTroops method to allow for subtracting of troops as wel
 May:: Worked on attack, it worked except it printed the wrong number of dispatches. Updated territoryOwned array so that it would work with the other two phases
 
 2022-01-28
-David:: Created new helper method that would help with finding adjacent territories during attack phase. Major progress on attack method and created way to end game by player demand midgame.
+David:: Created new helper method that would help with finding adjacent territories during attack phase. Major progress on attack method and created way to end game by player demand midgame. Finished attack method :)
